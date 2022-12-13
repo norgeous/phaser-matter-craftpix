@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phaser matter craftpix</title>
+  <link rel="icon" href="icon.svg" />
+  <link rel="canonical" href="https://norgeous.github.io/polygon-pong/" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet/less" type="text/css" href="style.less" />
+  <script src="https://cdn.jsdelivr.net/npm/less"></script>
+</head>
+<body>
+  <noscript>
+    javascript must be enabled!
+    <style> .js-enabled { display: none; } </style>
+  </noscript>
+
+  <div id="root" class="js-enabled"><div class="spin loader">🌀</div></div>
+
+  <script async src="https://ga.jspm.io/npm:es-module-shims@0.10.1/dist/es-module-shims.min.js"></script>
+
+  <!-- jspm, jsdelivr, skypack, unpkg, cdnjs, esm.sh, esm.run, cdnpkg.com -->
+  <script type="importmap">
+    {
+      "imports": {
+        "bowser": "https://cdn.skypack.dev/bowser",
+        "react": "https://cdn.skypack.dev/react",
+        "react-dom": "https://cdn.skypack.dev/react-dom",
+        "styled-components": "https://cdn.skypack.dev/styled-components@5.3.5",
+        "phaser": "https://esm.sh/phaser",
+        "peerjs": "https://cdn.skypack.dev/peerjs",
+        "sunrise-sunset-js": "https://cdn.skypack.dev/sunrise-sunset-js"
+      }
+    }
+  </script>
+
+  <script async src="service-worker-register.js"></script>
+</body>
+</html>

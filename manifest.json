@@ -1,0 +1,19 @@
+{
+  "name": "Phaser matter craftpix",
+  "short_name": "PMC",
+  "description": "not much!",
+  "theme_color": "#ffffff",
+  "background_color": "#000000",
+  "scope": "./",
+  "start_url": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type":"image/svg+xml",
+      "purpose": "any",
+      "sizes": "32x32 48x48 64x64 72x72 96x96 128x128 152x152 168x168 192x192 256x256 384x384 512x512 700x700 1280x1280"
+    }
+  ]
+}
