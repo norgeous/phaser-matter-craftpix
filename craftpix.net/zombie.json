@@ -1,0 +1,36 @@
+{
+  "frames": [
+    {
+      "filename": "zombie_attack_0000",
+      "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 }
+    },
+    {
+      "filename": "zombie_attack_0001",
+      "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 }
+    },
+    {
+      "filename": "zombie_attack_0002",
+      "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+      "sourceSize": { "w": 48, "h": 48 }
+    }
+  ],
+  "meta": {
+    "app": "manually created",
+    "version": "0.0.0",
+    "image": "zombie.png",
+    "format": "RGBA8888",
+    "size": { "w": 288, "h": 240 },
+    "scale": "1"
+  }
+}
