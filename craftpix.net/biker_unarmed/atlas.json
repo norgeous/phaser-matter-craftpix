@@ -5,7 +5,32 @@
     { "filename": "biker_unarmed_attack1_0002", "frame": { "x": 96,  "y": 0, "w": 48, "h": 48 }},
     { "filename": "biker_unarmed_attack1_0003", "frame": { "x": 144, "y": 0, "w": 48, "h": 48 }},
     { "filename": "biker_unarmed_attack1_0004", "frame": { "x": 192, "y": 0, "w": 48, "h": 48 }},
-    { "filename": "biker_unarmed_attack1_0005", "frame": { "x": 240, "y": 0, "w": 48, "h": 48 }}
+    { "filename": "biker_unarmed_attack1_0005", "frame": { "x": 240, "y": 0, "w": 48, "h": 48 }},
+
+    { "filename": "biker_unarmed_attack2_0000", "frame": { "x": 0,   "y": 48, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack2_0001", "frame": { "x": 48,  "y": 48, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack2_0002", "frame": { "x": 96,  "y": 48, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack2_0003", "frame": { "x": 144, "y": 48, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack2_0004", "frame": { "x": 192, "y": 48, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack2_0005", "frame": { "x": 240, "y": 48, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack2_0006", "frame": { "x": 288, "y": 48, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack2_0007", "frame": { "x": 336, "y": 48, "w": 48, "h": 48 }},
+
+    { "filename": "biker_unarmed_attack3_0000", "frame": { "x": 0,   "y": 96, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack3_0001", "frame": { "x": 48,  "y": 96, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack3_0002", "frame": { "x": 96,  "y": 96, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack3_0003", "frame": { "x": 144, "y": 96, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack3_0004", "frame": { "x": 192, "y": 96, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack3_0005", "frame": { "x": 240, "y": 96, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack3_0006", "frame": { "x": 288, "y": 96, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_attack3_0007", "frame": { "x": 336, "y": 96, "w": 48, "h": 48 }},
+
+    { "filename": "biker_unarmed_climb_0000", "frame": { "x": 0,   "y": 144, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_climb_0001", "frame": { "x": 48,  "y": 144, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_climb_0002", "frame": { "x": 96,  "y": 144, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_climb_0003", "frame": { "x": 144, "y": 144, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_climb_0004", "frame": { "x": 192, "y": 144, "w": 48, "h": 48 }},
+    { "filename": "biker_unarmed_climb_0005", "frame": { "x": 240, "y": 144, "w": 48, "h": 48 }}
   ],
   "meta": {
     "app": "manually created by @norgeous",
