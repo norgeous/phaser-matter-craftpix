@@ -25,7 +25,7 @@ export default class GameScene extends Phaser.Scene {
         repeat,
       });
       
-      this.add.sprite((i * 100) + 100, 100, 'zombie').play(key);
+      this.add.sprite((i * 50) + 50, 50, 'zombie').play(key);
     });
 
     Object.entries(animations2).forEach(([key, { end, frameRate, repeat }], i) => {
@@ -36,7 +36,7 @@ export default class GameScene extends Phaser.Scene {
         repeat,
       });
       
-      this.add.sprite((i * 100) + 100, 200, 'biker_unarmed').play(key);
+      this.add.sprite((i * 50) + 50, 100, 'biker_unarmed').play(key);
     });
   }
 
