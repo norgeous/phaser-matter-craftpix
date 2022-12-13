@@ -32,7 +32,7 @@
   "meta": {
     "app": "manually created by @norgeous",
     "version": "0.0.0",
-    "image": "zombie.png",
+    "image": "spritesheet.png",
     "format": "RGBA8888",
     "size": { "w": 288, "h": 240 },
     "scale": "1"
