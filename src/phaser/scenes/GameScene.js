@@ -2,8 +2,12 @@ import Phaser from 'phaser';
 import EmojiMan from '../objects/EmojiMan';
 
 export default class GameScene extends Phaser.Scene {
-  constructor(){
+  constructor () {
     super('game-scene');
+  }
+
+  preload () {
+    this.load.atlas('zombie', 'craftpix.net/zombie.png', 'craftpix.net/zombie.json');
   }
 
   create () {
@@ -44,6 +48,9 @@ export default class GameScene extends Phaser.Scene {
     this.matter.world.setBounds();
     this.matter.add.mouseSpring();
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.anims.create({ key: 'zombie_attack', frames: this.anims.generateFrameNames('zombie', { prefix: 'zombie_attack_', end: 5, zeroPad: 4 }), repeat: -1 });
+    const jellyfish = this.add.sprite(400, 300, 'zombie').play('zombie_attack');
   }
 
   update() {
