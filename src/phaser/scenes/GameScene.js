@@ -49,8 +49,29 @@ export default class GameScene extends Phaser.Scene {
     this.matter.add.mouseSpring();
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.anims.create({ key: 'zombie_attack', frames: this.anims.generateFrameNames('zombie', { prefix: 'zombie_attack_', end: 5, zeroPad: 4 }), repeat: -1 });
-    const jellyfish = this.add.sprite(400, 300, 'zombie').play('zombie_attack');
+    this.anims.create({
+      key: 'zombie_attack',
+      frames: this.anims.generateFrameNames('zombie', { prefix: 'zombie_attack_', end: 5, zeroPad: 4 }),
+      repeat: -1,
+      frameRate: 10,
+    });
+    const zombieAttack = this.add.sprite(100, 100, 'zombie').play('zombie_attack');
+
+    this.anims.create({
+      key: 'zombie_death',
+      frames: this.anims.generateFrameNames('zombie', { prefix: 'zombie_death_', end: 5, zeroPad: 4 }),
+      repeat: -1,
+      frameRate: 10,
+    });
+    const zombieDeath = this.add.sprite(200, 100, 'zombie').play('zombie_death');
+
+    this.anims.create({
+      key: 'zombie_hurt',
+      frames: this.anims.generateFrameNames('zombie', { prefix: 'zombie_hurt_', end: 1, zeroPad: 4 }),
+      repeat: -1,
+      frameRate: 5,
+    });
+    const zombieHurt = this.add.sprite(300, 100, 'zombie').play('zombie_hurt');
   }
 
   update() {
