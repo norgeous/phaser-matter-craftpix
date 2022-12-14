@@ -35,8 +35,10 @@ export default class GameScene extends Phaser.Scene {
         frameRate,
         repeat,
       });
+
+      const index = Math.floor(i / 10);
       
-      this.add.sprite((i * 50) + 50, 100, 'biker_unarmed').play(key);
+      this.add.sprite((i * 50) + 50 - (index * 500), (index * 50) + 100, 'biker_unarmed').play(key);
     });
   }
 
