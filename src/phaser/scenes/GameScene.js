@@ -29,19 +29,25 @@ export default class GameScene extends Phaser.Scene {
     });
 
     Object.entries(animations2).forEach(([key, { end, frameRate, repeat }], i) => {
-      this.anims.create({
+      const index = Math.floor(i / 10);      
+      const sprite = this.add.sprite((i * 50) + 50 - (index * 500), (index * 50) + 100, 'biker_unarmed');
+      sprite.anims.create({
         key,
         frames: this.anims.generateFrameNames('biker_unarmed', { prefix: `${key}_`, end, zeroPad: 4 }),
         frameRate,
         repeat,
       });
+      sprite.anims
+        .play(key)
+        .on('animationcomplete', () => {
+          console.log('done');
+        })
+        .on('animationrepeat', () => {
+          // console.log('loop');
+        });
 
-      const index = Math.floor(i / 10);
-      
-      this.add.sprite((i * 50) + 50 - (index * 500), (index * 50) + 100, 'biker_unarmed')
-        // .setTint(0xaaFFaa)
-        // .setTintFill(0xd22f1e)
-        .play(key);
+      // sprite.setTint(0xaaFFaa);
+      // sprite.setTintFill(0xd22f1e);
     });
   }
 

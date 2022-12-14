@@ -7,21 +7,21 @@ proximity sensor (enemy)
 
 # states
 idle
-walking
-running
-crouching
-dashing
-jumping
-falling
-doublejumping
-climbing
-hanging
+walk
+run
+sit
+dash
+jump
+fall
+doublejump
+climb
+hang
+ragdoll
 
-attacking
-attacking x4 anims
-emoting x2 anims
-talking
-using
+attack x4 anims
+emote x2 anims
+talk
+use
 
 alive -> dying -> dead
 

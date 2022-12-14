@@ -3,7 +3,7 @@ export default {
   biker_attack2:     { end: 8, frameRate: 10, repeat: -1 },
   biker_attack3:     { end: 7, frameRate: 10, repeat: -1 },
   biker_climb:       { end: 5, frameRate: 10, repeat: -1 },
-  biker_death:       { end: 5, frameRate: 10, repeat:  0-1 },
+  biker_death:       { end: 5, frameRate: 10, repeat:  0 },
   biker_djump:       { end: 5, frameRate: 10, repeat:  0-1 },
   // biker_hurt:        { end: 1, frameRate:  5, repeat:  0-1 },
   biker_idle:        { end: 3, frameRate:  5, repeat: -1 },
