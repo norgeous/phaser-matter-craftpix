@@ -38,7 +38,10 @@ export default class GameScene extends Phaser.Scene {
 
       const index = Math.floor(i / 10);
       
-      this.add.sprite((i * 50) + 50 - (index * 500), (index * 50) + 100, 'biker_unarmed').play(key);
+      this.add.sprite((i * 50) + 50 - (index * 500), (index * 50) + 100, 'biker_unarmed')
+        // .setTint(0xaaFFaa)
+        // .setTintFill(0xd22f1e)
+        .play(key);
     });
   }
 
