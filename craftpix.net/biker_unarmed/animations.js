@@ -17,7 +17,7 @@ export default {
   hang_fall:   { end: 3, frameRate: 10, repeat:  0-1 },
   hang_idle:   { end: 3, frameRate: 10, repeat:  0-1 },
   happy:       { end: 5, frameRate: 10, repeat:  0-1 },
-  pullup:      { end: 5, frameRate: 10, repeat:  0-1 },
+  // pullup:      { end: 5, frameRate: 10, repeat:  0-1 },
   sit:         { end: 3, frameRate: 10, repeat: -1 },
   talk:        { end: 5, frameRate: 10, repeat: -1 },
   use:         { end: 5, frameRate: 10, repeat:  0-1 },
