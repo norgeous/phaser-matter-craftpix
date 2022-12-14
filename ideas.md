@@ -9,23 +9,26 @@ proximity sensor (enemy)
 idle
 walking
 running
+crouching
+dashing
 jumping
 falling
 doublejumping
+climbing
+hanging
+
 attacking
-crouching
 attacking x4 anims
 emoting x2 anims
-climbing
 talking
-hanging
-aggrevated
 using
+
 alive -> dying -> dead
 
+aggrevated (enemy only?)
 
 # status effects
-status effects: none, hurt, stunned, poisoned, frozen, ablaze, invulnerable, empowered
+status effects: none, hurt, stunned, poisoned, frozen, ablaze, wet, invulnerable, empowered
 - duration
 - cooldown
 - priority
