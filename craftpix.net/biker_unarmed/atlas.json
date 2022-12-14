@@ -164,7 +164,7 @@
     "version": "0.0.0",
     "image": "spritesheet.png",
     "format": "RGBA8888",
-    "size": { "w": 288, "h": 240 },
+    "size": { "w": 384, "h": 1200 },
     "scale": "1"
   }
 }
