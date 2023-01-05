@@ -87,6 +87,8 @@
     { "filename": "angry_0003", "frame": { "x": 144, "y": 576, "w": 48, "h": 48 }},
     { "filename": "angry_0004", "frame": { "x": 192, "y": 576, "w": 48, "h": 48 }},
     { "filename": "angry_0005", "frame": { "x": 240, "y": 576, "w": 48, "h": 48 }},
+    
+    { "filename": "ragdoll_0000", "frame": { "x": 96,  "y": 576, "w": 48, "h": 48 }},
 
     { "filename": "dash_0000", "frame": { "x": 0,   "y": 624, "w": 48, "h": 48 }},
     { "filename": "dash_0001", "frame": { "x": 48,  "y": 624, "w": 48, "h": 48 }},
@@ -106,6 +108,8 @@
     { "filename": "hang_fall_0001", "frame": { "x": 48,  "y": 720, "w": 48, "h": 48 }},
     { "filename": "hang_fall_0002", "frame": { "x": 96,  "y": 720, "w": 48, "h": 48 }},
     { "filename": "hang_fall_0003", "frame": { "x": 144, "y": 720, "w": 48, "h": 48 }},
+    
+    { "filename": "fall_0000", "frame": { "x": 48,  "y": 720, "w": 48, "h": 48 }},
 
     { "filename": "hang_idle_0000", "frame": { "x": 0,   "y": 768, "w": 48, "h": 48 }},
     { "filename": "hang_idle_0001", "frame": { "x": 48,  "y": 768, "w": 48, "h": 48 }},
@@ -126,10 +130,15 @@
     { "filename": "pullup_0004", "frame": { "x": 192, "y": 864, "w": 48, "h": 96 }},
     { "filename": "pullup_0005", "frame": { "x": 240, "y": 864, "w": 48, "h": 96 }},
 
-    { "filename": "sit_0000", "frame": { "x": 0,   "y": 960, "w": 48, "h": 48 }},
-    { "filename": "sit_0001", "frame": { "x": 48,  "y": 960, "w": 48, "h": 48 }},
-    { "filename": "sit_0002", "frame": { "x": 96,  "y": 960, "w": 48, "h": 48 }},
-    { "filename": "sit_0003", "frame": { "x": 144, "y": 960, "w": 48, "h": 48 }},
+    { "filename": "sit_enter_0000", "frame": { "x": 0,   "y": 960, "w": 48, "h": 48 }},
+    { "filename": "sit_enter_0001", "frame": { "x": 48,  "y": 960, "w": 48, "h": 48 }},
+    { "filename": "sit_enter_0002", "frame": { "x": 96,  "y": 960, "w": 48, "h": 48 }},
+
+    { "filename": "sit_idle_0000", "frame": { "x": 96,  "y": 960, "w": 48, "h": 48 }},
+    
+    { "filename": "sit_exit_0000", "frame": { "x": 96,  "y": 960, "w": 48, "h": 48 }},
+    { "filename": "sit_exit_0001", "frame": { "x": 48,  "y": 960, "w": 48, "h": 48 }},
+    { "filename": "sit_exit_0002", "frame": { "x": 0,   "y": 960, "w": 48, "h": 48 }},
 
     { "filename": "talk_0000", "frame": { "x": 0,   "y": 1008, "w": 48, "h": 48 }},
     { "filename": "talk_0001", "frame": { "x": 48,  "y": 1008, "w": 48, "h": 48 }},
