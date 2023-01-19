@@ -13,7 +13,7 @@ const fire = (
   const particles = entity.scene.add.particles('red');
   const emitter = particles.createEmitter({
     follow: entity,
-    speed: .1,
+    speed: 10,
     scale: { start: .1, end: 0 },
     lifespan: 1000,
     gravityY: -10,
@@ -21,8 +21,6 @@ const fire = (
     alpha: { start: 1, end: 0, ease: 'Quad.easeIn' },
     blendMode: 'ADD',
     frequency: 100,
-    // quantity: .0000000000001,
-    // maxParticles: 1,
     bounce: true,
     emitZone: {
       type: 'random',
