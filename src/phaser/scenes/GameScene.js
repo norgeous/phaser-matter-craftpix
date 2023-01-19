@@ -16,7 +16,7 @@ export default class GameScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.test1 = new Character(this, 300,300, { type: 'zombie' });
-    this.test2 = new Character(this, 300,300, { type: 'zombie' });
+    // this.test2 = new Character(this, 300,300, { type: 'zombie' });
   }
 
   update () {

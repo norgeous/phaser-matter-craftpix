@@ -1,9 +1,11 @@
 import Phaser from 'phaser';
 import HealthBar from '../overlays/HealthBar';
 // import { collisionCategories } from '../enums/Collisions';
-import { findOtherBody } from '../utils';
+// import { findOtherBody } from '../utils';
 import anims from '../../../craftpix.net/index.js';
 import Sensor from '../Sensor';
+import StEM from './StEM';
+import stun from '../status-effects/stun';
 
 const keepUprightStratergies = {
   NONE: 'NONE',
@@ -22,9 +24,6 @@ export default class Character extends Phaser.GameObjects.Container {
     x, y,
     {
       type = 'zombie',
-      // name = 'entity',
-      // spriteSheetKey = 'player',
-      // animations = {},
       health = 100,
       enableHealthBar = true,
       physicsConfig = {
@@ -50,18 +49,6 @@ export default class Character extends Phaser.GameObjects.Container {
     this.enableKeepUpright = enableKeepUpright;
     this.keepUprightStratergy = keepUprightStratergy;
     this.facing = facing;
-
-    this.statusEffects = []; // stunned, poisoned, aflame, invulnerable
-
-    // create animations
-    // Object.entries(animations).forEach(([animationKey, { start, end, fps, repeat = -1 }]) => {
-    //   this.scene.anims.create({
-    //     key: this.getKey(animationKey),
-    //     frameRate: fps,
-    //     frames: this.sprite.anims.generateFrameNumbers(spriteSheetKey, { start, end }),
-    //     repeat,
-    //   });
-    // });
 
     // health bar
     if (enableHealthBar) {
@@ -130,10 +117,16 @@ export default class Character extends Phaser.GameObjects.Container {
     // save a backup of original inertia
     this.gameObject.body.inertia_original = this.gameObject.body.inertia;
     this.gameObject.body.inverseInertia_original = this.gameObject.body.inverseInertia;
+
+    // Status Effects Machine
+    this.StEM = new StEM(this);
+    this.StEM.add('stun');
+    this.StEM.add('fire');
   }
 
   static preload(scene, type) {    
     scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
+    scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
   }
 
   flipXSprite(shouldFlip) {
@@ -146,13 +139,8 @@ export default class Character extends Phaser.GameObjects.Container {
   }
 
   takeDamage(amount) {
-    if (this.isAlive) {
-      this.health -= amount;
-      if (this.health <= 0)  {
-        this.health = 0;
-        this.isAlive = false;
-      }
-    }
+    if (this.health > 0) this.health -= amount;
+    if (this.health < 0) this.health = 0;
   }
 
   update() {
@@ -164,15 +152,20 @@ export default class Character extends Phaser.GameObjects.Container {
     // flip sprite to match facing
     this.flipXSprite(this.facing === -1);
 
-    // debug as text
+    // debug text / entity name
     this.text.setText(
       [
         this.sensors.left.touching.size ? 'L' : '-',
         this.sensors.right.touching.size ? 'R' : '-',
         this.sensors.top.touching.size ? 'T' : '-',
         this.sensors.bottom.touching.size ? 'B' : '-',
+        this.StEM.getEmojis(),
       ].join('')
     );
+
+    // set tint of sprite
+    // console.log(this.sprite.tintFill);
+    this.sprite.setTint(this.StEM.getTint() || 0xffffff);
 
     // // SPRINGY
     // if (this.keepUprightStratergy === keepUprightStratergies.SPRINGY && !this.isStunned) {

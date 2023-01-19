@@ -13,3 +13,5 @@ export default {
     entity.rotation = 0;
   },
 };
+
+// IDEA: redo as non-self aborting status-effect

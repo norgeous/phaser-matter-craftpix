@@ -2,7 +2,7 @@ export class AbPromise extends Promise {
   constructor(executor) {
     const controller = new window.AbortController();
     super((resolve, reject) => {
-      controller.signal.addEventListener('abort', event => reject(event.target.reason));
+      controller.signal.addEventListener('abort', event => resolve(event.target.reason));
       executor(resolve, reject);
     });
     this.controller = controller;
@@ -20,7 +20,7 @@ export class AbPromise extends Promise {
 //   resolve('detest');
 // })
 //   .then(data => console.log('resolved with', data))
-//   .catch(error => console.log('rejected or aborted with', error));
+//   .finally(data => console.log('resolved, rejected or aborted with', data));
 
 
 // p.controller.abort('test');
