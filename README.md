@@ -11,4 +11,4 @@ https://craftpix.net/freebies/ for sprite art
 
 https://www.codeandweb.com/texturepacker/ to create spritesheet atlases
 
-https://github.com/mapeditor/tiled to create levels
+https://github.com/mapeditor/tiled to create levels (or `choco install tiled` on Windows)
