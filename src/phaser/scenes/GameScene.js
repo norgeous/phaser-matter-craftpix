@@ -35,7 +35,8 @@ export default class GameScene extends Phaser.Scene {
         x: (width/2) + x,
         y: (height/2) + y,
       },
-    });
+      // originX: 0.5,
+    }).setOrigin(0);
     
     console.log({ x,y, width, height, mgo });
 
