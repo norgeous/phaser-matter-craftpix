@@ -56,7 +56,6 @@
         {
          "draworder":"topdown",
          "id":2,
-         "locked":true,
          "name":"Object Layer 1",
          "objects":[
                 {
@@ -111,9 +110,11 @@
                  "x":256,
                  "y":1088
                 }],
+         "offsetx":0,
+         "offsety":5,
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
