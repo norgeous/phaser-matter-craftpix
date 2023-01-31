@@ -1,6 +1,16 @@
 import Phaser from 'phaser';
 import Character from '../characters/Character';
 
+// https://github.com/photonstorm/phaser/issues/6178
+const convertTiledPolygonToGameObject = (scene, {x,y,polygon}) => {
+  const body = scene.matter.add.fromVertices(x, y, polygon, { isStatic: true });
+  const { x: bx, y: by } = body.position;
+  const { x: cx, y: cy } = body.centerOffset;
+  const polyVerts = body.vertices.map(({ x: vx, y: vy }) => ({ x: vx - bx + cx, y: vy - by + cy }));
+  const poly = scene.add.polygon(bx, by, polyVerts, 0, 0);  
+  return scene.matter.add.gameObject(poly, body, false).setPosition(cx + x, cy + y);
+};
+
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('game-scene');
@@ -18,27 +28,9 @@ export default class GameScene extends Phaser.Scene {
     const tileset = map.addTilesetImage('tileset', 'tileset');
     const layer0 = map.createLayer(0, tileset);
     const ground = map.getObjectLayer('ground');
-    // map.setCollisionByProperty({ collides: true });
-    // this.matter.world.convertTilemapLayer(layer1);
 
-    const { x, y, polygon } = ground.objects[0];
-    const polygonShape = this.add.polygon(0, 0, polygon);
-    const { width, height } = polygonShape;
-    const mgo = this.matter.add.gameObject(polygonShape, {
-      isStatic: true,
-      shape: {
-        type: 'fromVerts',
-        verts: polygon,
-        // flagInternal: true,
-      },
-      position: {
-        x: (width/2) + x,
-        y: (height/2) + y,
-      },
-      // originX: 0.5,
-    }).setOrigin(0);
-    
-    console.log({ x,y, width, height, mgo });
+    const groundGOs = ground.objects.map(({ x, y, polygon }) => convertTiledPolygonToGameObject(this, {x,y,polygon}));
+    // console.log(groundGOs);
 
     this.matter.world.setBounds();
     this.matter.add.mouseSpring();
