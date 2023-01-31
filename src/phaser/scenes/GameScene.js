@@ -45,7 +45,7 @@ export default class GameScene extends Phaser.Scene {
 
   update () {
     this.test1.update();
-    this.smoothMoveCameraTowards(this.test1, 0.9);
+    this.smoothMoveCameraTowards(this.test1, 0.95);
   }
 
   smoothMoveCameraTowards (target, smoothFactor = 0) {
