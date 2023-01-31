@@ -31,7 +31,7 @@ export default class GameScene extends Phaser.Scene {
 
     const groundGOs = ground.objects.map(({ x, y, polygon }) => convertTiledPolygonToGameObject(this, {x,y,polygon}));
 
-    // this.matter.world.setBounds();
+    this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels, 1000);
     this.matter.add.mouseSpring();
     this.cursors = this.input.keyboard.createCursorKeys();
 
