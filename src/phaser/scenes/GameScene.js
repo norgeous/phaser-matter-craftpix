@@ -30,19 +30,29 @@ export default class GameScene extends Phaser.Scene {
     const ground = map.getObjectLayer('ground');
 
     const groundGOs = ground.objects.map(({ x, y, polygon }) => convertTiledPolygonToGameObject(this, {x,y,polygon}));
-    // console.log(groundGOs);
 
-    this.matter.world.setBounds();
+    // this.matter.world.setBounds();
     this.matter.add.mouseSpring();
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.test1 = new Character(this, 300,300, { type: 'zombie' });
     // this.test2 = new Character(this, 300,300, { type: 'zombie' });
 
-
+    // camera
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    this.smoothMoveCameraTowards(this.test1, 0); // snap to player
   }
 
   update () {
     this.test1.update();
+    this.smoothMoveCameraTowards(this.test1, 0.9);
   }
+
+  smoothMoveCameraTowards (target, smoothFactor = 0) {
+    if (!target.body) return;
+    const cam = this.cameras.main;
+    cam.scrollX = smoothFactor * cam.scrollX + (1 - smoothFactor) * (target.x - cam.width * 0.5);
+    cam.scrollY = smoothFactor * cam.scrollY + (1 - smoothFactor) * (target.y - cam.height * 0.6);
+  }
+
 }
