@@ -167,37 +167,37 @@ export default class Character extends Phaser.GameObjects.Container {
     // console.log(this.sprite.tintFill);
     this.sprite.setTint(this.StEM.getTint() || 0xffffff);
 
-    // // SPRINGY
-    // if (this.keepUprightStratergy === keepUprightStratergies.SPRINGY && !this.isStunned) {
-    //   const twoPi = Math.PI * 2;
-    //   const { angle, angularVelocity } = this.gameObject.body;
-    //   this.gameObject.rotation = this.gameObject.rotation % twoPi; // modulo spins
-    //   const diff = 0 - angle;
-    //   const newAv = angularVelocity + (diff / 100);
-    //   this.gameObject.setAngularVelocity(newAv);
-    // }
+    // SPRINGY
+    if (this.keepUprightStratergy === keepUprightStratergies.SPRINGY && !this.isStunned) {
+      const twoPi = Math.PI * 2;
+      const { angle, angularVelocity } = this.gameObject.body;
+      this.gameObject.rotation = this.gameObject.rotation % twoPi; // modulo spins
+      const diff = 0 - angle;
+      const newAv = angularVelocity + (diff)// / 100);
+      this.gameObject.setAngularVelocity(newAv);
+    }
 
-    // // INSTANT
-    // if (this.keepUprightStratergy === keepUprightStratergies.INSTANT && !this.isStunned) {
-    //   if (this.gameObject.body.inertia !== Infinity) {
-    //     // save the old inertia
-    //     this.gameObject.body.inertia_old = this.gameObject.body.inertia;
-    //     this.gameObject.body.inverseInertia_old = this.gameObject.body.inverseInertia;
-    //     this.gameObject.setAngularVelocity(0);
-    //     this.gameObject.rotation = 0;
-    //     this.gameObject.setFixedRotation();
-    //   }
-    // }
+    // INSTANT
+    if (this.keepUprightStratergy === keepUprightStratergies.INSTANT && !this.isStunned) {
+      if (this.gameObject.body.inertia !== Infinity) {
+        // save the old inertia
+        this.gameObject.body.inertia_old = this.gameObject.body.inertia;
+        this.gameObject.body.inverseInertia_old = this.gameObject.body.inverseInertia;
+        this.gameObject.setAngularVelocity(0);
+        this.gameObject.rotation = 0;
+        this.gameObject.setFixedRotation();
+      }
+    }
 
-    // // NONE
-    // if (this.keepUprightStratergy === keepUprightStratergies.NONE || this.isStunned) {
-    //   if (this.gameObject.body.inertia_old && this.gameObject.body.inverseInertia_old) {
-    //     this.gameObject.body.inertia = this.gameObject.body.inertia_old;
-    //     this.gameObject.body.inverseInertia = this.gameObject.body.inverseInertia_old;
-    //     delete this.gameObject.body.inertia_old;
-    //     delete this.gameObject.body.inverseInertia_old;
-    //   }
-    // }
+    // NONE
+    if (this.keepUprightStratergy === keepUprightStratergies.NONE || this.isStunned) {
+      if (this.gameObject.body.inertia_old && this.gameObject.body.inverseInertia_old) {
+        this.gameObject.body.inertia = this.gameObject.body.inertia_old;
+        this.gameObject.body.inverseInertia = this.gameObject.body.inverseInertia_old;
+        delete this.gameObject.body.inertia_old;
+        delete this.gameObject.body.inverseInertia_old;
+      }
+    }
 
     // kill if zero health
     if (this.health <= 0) {

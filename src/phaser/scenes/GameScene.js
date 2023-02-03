@@ -29,7 +29,7 @@ export default class GameScene extends Phaser.Scene {
     const layer0 = map.createLayer(0, tileset);
     const ground = map.getObjectLayer('ground');
 
-    const groundGOs = ground.objects.map(({ x, y, polygon }) => convertTiledPolygonToGameObject(this, {x,y,polygon}));
+    const groundGOs = ground.objects.map(({ x, y, polygon }) => convertTiledPolygonToGameObject(this, { x, y, polygon }));
 
     this.matter.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels, 1000);
     this.matter.add.mouseSpring();

@@ -41,3 +41,8 @@ collision mask
 current animation
 arm position
 velocity
+
+# ECOSYSTEM
+- DOG
+- CAT
+- BIRD
