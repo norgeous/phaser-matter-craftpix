@@ -1,8 +1,6 @@
 import Phaser from 'phaser';
 import HealthBar from '../overlays/HealthBar';
-// import { collisionCategories } from '../enums/Collisions';
-// import { findOtherBody } from '../utils';
-import anims from '../../../craftpix.net/index.js';
+import craftpixData from '../../../craftpix.net/index.js';
 import Sensor from '../Sensor';
 import StEM from './StEM';
 import stun from '../status-effects/stun';
@@ -19,6 +17,11 @@ const craftpixOffset = {
 };
 
 export default class Character extends Phaser.GameObjects.Container {
+  static preload(scene, type) {    
+    scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
+    scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
+  }
+
   constructor (
     scene,
     x, y,
@@ -78,7 +81,8 @@ export default class Character extends Phaser.GameObjects.Container {
     this.add(this.sprite);
     
     // create animations
-    Object.entries(anims[this.type]).forEach(([key, { end, frameRate, repeat }]) => {
+    const anims = craftpixData[this.type].animations;
+    Object.entries(anims).forEach(([key, { end, frameRate, repeat }]) => {
       this.sprite.anims.create({
         key,
         frames: this.sprite.anims.generateFrameNames(this.type, { prefix: `${key}_`, end, zeroPad: 4 }),
@@ -87,7 +91,8 @@ export default class Character extends Phaser.GameObjects.Container {
       });
     });
 
-    this.sprite.play(Object.keys(anims[this.type])[0]); // play first anim
+    console.log(Object.keys(anims)[0], this.sprite);
+    this.sprite.play(Object.keys(anims)[0]); // play first anim
 
     // container
     this.gameObject = this.scene.matter.add.gameObject(this);
@@ -122,11 +127,6 @@ export default class Character extends Phaser.GameObjects.Container {
     this.StEM = new StEM(this);
     // this.StEM.add('stun');
     this.StEM.add('fire');
-  }
-
-  static preload(scene, type) {    
-    scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
-    scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
   }
 
   flipXSprite(shouldFlip) {

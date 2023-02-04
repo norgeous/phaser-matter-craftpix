@@ -18,6 +18,7 @@ export default class GameScene extends Phaser.Scene {
 
   preload () {
     Character.preload(this, 'zombie');
+    Character.preload(this, 'dobermann');
     this.load.image('tileset', 'original-art/tileset.png');
     this.load.tilemapTiledJSON('level1', 'original-art/untitled.json');
   }
@@ -36,6 +37,7 @@ export default class GameScene extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.test1 = new Character(this, 300,300, { type: 'zombie' });
+    this.test2 = new Character(this, 300,300, { type: 'dobermann' });
     // this.test2 = new Character(this, 300,300, { type: 'zombie' });
 
     // camera

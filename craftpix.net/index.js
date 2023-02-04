@@ -1,7 +1,12 @@
-import ZombieAnimations from './zombie/animations.js';
+// import zombieAnimations from './zombie/animations.js';
+// import dobermannAnimations from './dobermann/animations.js';
+import zombie from './zombie/index.js';
+import dobermann from './dobermann/index.js';
 
-const anims = {
-  zombie: ZombieAnimations,
+const data = {
+  // zombie: zombieAnimations,
+  zombie,
+  dobermann,
 };
 
-export default anims;
+export default data;
