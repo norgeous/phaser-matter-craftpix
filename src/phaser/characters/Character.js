@@ -29,14 +29,14 @@ export default class Character extends Phaser.GameObjects.Container {
       type = 'zombie',
       health = 100,
       enableHealthBar = true,
-      physicsConfig = {
-        shape: {
-          type: 'rectangle',
-          width: 14,
-          height: 34,
-        },
-        chamfer: { radius: 4 },
-      },
+      // physicsConfig = {
+      //   shape: {
+      //     type: 'rectangle',
+      //     width: 14,
+      //     height: 34,
+      //   },
+      //   chamfer: { radius: 4 },
+      // },
       enableKeepUpright = false,
       keepUprightStratergy = keepUprightStratergies.SPRINGY,
       facing = Math.random() > .5 ? 1 : -1,
@@ -52,6 +52,13 @@ export default class Character extends Phaser.GameObjects.Container {
     this.enableKeepUpright = enableKeepUpright;
     this.keepUprightStratergy = keepUprightStratergy;
     this.facing = facing;
+
+    const {
+      offsetX,
+      offsetY,
+      animations,
+      bodyConfig,
+    } = craftpixData[this.type];
 
     // health bar
     if (enableHealthBar) {
@@ -74,15 +81,14 @@ export default class Character extends Phaser.GameObjects.Container {
 
     // sprite
     this.sprite = this.scene.add.sprite(
-      craftpixOffset.x,
-      craftpixOffset.y,
+      offsetX,
+      offsetY,
       this.type,
     );
     this.add(this.sprite);
     
     // create animations
-    const anims = craftpixData[this.type].animations;
-    Object.entries(anims).forEach(([key, { end, frameRate, repeat }]) => {
+    Object.entries(animations).forEach(([key, { end, frameRate, repeat }]) => {
       this.sprite.anims.create({
         key,
         frames: this.sprite.anims.generateFrameNames(this.type, { prefix: `${key}_`, end, zeroPad: 4 }),
@@ -91,8 +97,7 @@ export default class Character extends Phaser.GameObjects.Container {
       });
     });
 
-    console.log(Object.keys(anims)[0], this.sprite);
-    this.sprite.play(Object.keys(anims)[0]); // play first anim
+    this.sprite.play(Object.keys(animations)[0]); // play first anim
 
     // container
     this.gameObject = this.scene.matter.add.gameObject(this);
@@ -100,8 +105,8 @@ export default class Character extends Phaser.GameObjects.Container {
     
     // sensors
     const { Bodies, Body } = Phaser.Physics.Matter.Matter;
-    const { width, height } = physicsConfig.shape;
-    this.hitbox = Bodies.rectangle(0, 0, width, height, { ...physicsConfig, label: 'Entity' }),
+    const { width, height } = bodyConfig.shape;
+    this.hitbox = Bodies.rectangle(0, 0, width, height, { ...bodyConfig, label: 'Entity' }),
     this.sensors = {
       left: new Sensor({ shape: { type: 'circle', radius: 4 }, x: -width/2, y: 0, label: 'left' }),
       right: new Sensor({ shape: { type: 'circle', radius: 4 }, x: width/2, y: 0, label: 'right' }),

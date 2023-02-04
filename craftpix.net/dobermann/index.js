@@ -1,9 +1,15 @@
 import animations from './animations.js';
 
 export default {
-  width: 10,
-  height: 10,
-  offsetX: 0,
-  offsetY: 0,
+  offsetX: 5,
+  offsetY: -8,
   animations,
+  bodyConfig: {
+    shape: {
+      type: 'rectangle',
+      width: 30,
+      height: 30,
+    },
+    chamfer: { radius: 4 },
+  },
 };
