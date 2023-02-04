@@ -29,15 +29,7 @@ export default class Character extends Phaser.GameObjects.Container {
       type = 'zombie',
       health = 100,
       enableHealthBar = true,
-      // physicsConfig = {
-      //   shape: {
-      //     type: 'rectangle',
-      //     width: 14,
-      //     height: 34,
-      //   },
-      //   chamfer: { radius: 4 },
-      // },
-      enableKeepUpright = false,
+      enableKeepUpright = true,
       keepUprightStratergy = keepUprightStratergies.SPRINGY,
       facing = Math.random() > .5 ? 1 : -1,
       collideCallback = () => {},
@@ -53,12 +45,7 @@ export default class Character extends Phaser.GameObjects.Container {
     this.keepUprightStratergy = keepUprightStratergy;
     this.facing = facing;
 
-    const {
-      offsetX,
-      offsetY,
-      animations,
-      bodyConfig,
-    } = craftpixData[this.type];
+    this.config = craftpixData[this.type];
 
     // health bar
     if (enableHealthBar) {
@@ -81,14 +68,14 @@ export default class Character extends Phaser.GameObjects.Container {
 
     // sprite
     this.sprite = this.scene.add.sprite(
-      offsetX,
-      offsetY,
+      this.config.sprite.offsetX,
+      this.config.sprite.offsetY,
       this.type,
     );
     this.add(this.sprite);
     
     // create animations
-    Object.entries(animations).forEach(([key, { end, frameRate, repeat }]) => {
+    Object.entries(this.config.animations).forEach(([key, { end, frameRate, repeat }]) => {
       this.sprite.anims.create({
         key,
         frames: this.sprite.anims.generateFrameNames(this.type, { prefix: `${key}_`, end, zeroPad: 4 }),
@@ -97,16 +84,17 @@ export default class Character extends Phaser.GameObjects.Container {
       });
     });
 
-    this.sprite.play(Object.keys(animations)[0]); // play first anim
+    // play first anim
+    this.sprite.play(Object.keys(this.config.animations)[0]);
 
-    // container
+    // physics container
     this.gameObject = this.scene.matter.add.gameObject(this);
     this.scene.add.existing(this);
     
     // sensors
     const { Bodies, Body } = Phaser.Physics.Matter.Matter;
-    const { width, height } = bodyConfig.shape;
-    this.hitbox = Bodies.rectangle(0, 0, width, height, { ...bodyConfig, label: 'Entity' }),
+    const { width, height } = this.config.body.shape;
+    this.hitbox = Bodies.rectangle(0, 0, width, height, { ...this.config.body, label: 'Entity' }),
     this.sensors = {
       left: new Sensor({ shape: { type: 'circle', radius: 4 }, x: -width/2, y: 0, label: 'left' }),
       right: new Sensor({ shape: { type: 'circle', radius: 4 }, x: width/2, y: 0, label: 'right' }),
@@ -131,15 +119,15 @@ export default class Character extends Phaser.GameObjects.Container {
     // Status Effects Machine
     this.StEM = new StEM(this);
     // this.StEM.add('stun');
-    this.StEM.add('fire');
+    // this.StEM.add('fire');
   }
 
   flipXSprite(shouldFlip) {
     this.sprite.flipX = shouldFlip;
     if (shouldFlip) {
-      this.sprite.x = -craftpixOffset.x;
+      this.sprite.x = -this.config.sprite.offsetX;
     } else {
-      this.sprite.x = craftpixOffset.x;
+      this.sprite.x = this.config.sprite.offsetX;
     }
   }
 
@@ -178,31 +166,31 @@ export default class Character extends Phaser.GameObjects.Container {
       const { angle, angularVelocity } = this.gameObject.body;
       this.gameObject.rotation = this.gameObject.rotation % twoPi; // modulo spins
       const diff = 0 - angle;
-      const newAv = angularVelocity + (diff)// / 100);
+      const newAv = angularVelocity + (diff / 100);
       this.gameObject.setAngularVelocity(newAv);
     }
 
-    // INSTANT
-    if (this.keepUprightStratergy === keepUprightStratergies.INSTANT && !this.isStunned) {
-      if (this.gameObject.body.inertia !== Infinity) {
-        // save the old inertia
-        this.gameObject.body.inertia_old = this.gameObject.body.inertia;
-        this.gameObject.body.inverseInertia_old = this.gameObject.body.inverseInertia;
-        this.gameObject.setAngularVelocity(0);
-        this.gameObject.rotation = 0;
-        this.gameObject.setFixedRotation();
-      }
-    }
+    // // INSTANT
+    // if (this.keepUprightStratergy === keepUprightStratergies.INSTANT && !this.isStunned) {
+    //   if (this.gameObject.body.inertia !== Infinity) {
+    //     // save the old inertia
+    //     this.gameObject.body.inertia_old = this.gameObject.body.inertia;
+    //     this.gameObject.body.inverseInertia_old = this.gameObject.body.inverseInertia;
+    //     this.gameObject.setAngularVelocity(0);
+    //     this.gameObject.rotation = 0;
+    //     this.gameObject.setFixedRotation();
+    //   }
+    // }
 
-    // NONE
-    if (this.keepUprightStratergy === keepUprightStratergies.NONE || this.isStunned) {
-      if (this.gameObject.body.inertia_old && this.gameObject.body.inverseInertia_old) {
-        this.gameObject.body.inertia = this.gameObject.body.inertia_old;
-        this.gameObject.body.inverseInertia = this.gameObject.body.inverseInertia_old;
-        delete this.gameObject.body.inertia_old;
-        delete this.gameObject.body.inverseInertia_old;
-      }
-    }
+    // // NONE
+    // if (this.keepUprightStratergy === keepUprightStratergies.NONE || this.isStunned) {
+    //   if (this.gameObject.body.inertia_old && this.gameObject.body.inverseInertia_old) {
+    //     this.gameObject.body.inertia = this.gameObject.body.inertia_old;
+    //     this.gameObject.body.inverseInertia = this.gameObject.body.inverseInertia_old;
+    //     delete this.gameObject.body.inertia_old;
+    //     delete this.gameObject.body.inverseInertia_old;
+    //   }
+    // }
 
     // kill if zero health
     if (this.health <= 0) {

@@ -1,10 +1,12 @@
 import animations from './animations.js';
 
 export default {
-  offsetX: 10,
-  offsetY: -7,
   animations,
-  bodyConfig: {
+  sprite: {
+    offsetX: 10,
+    offsetY: -7,
+  },
+  body: {
     shape: {
       type: 'rectangle',
       width: 14,

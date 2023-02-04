@@ -1,14 +1,16 @@
 import animations from './animations.js';
 
 export default {
-  offsetX: 5,
-  offsetY: -8,
   animations,
-  bodyConfig: {
+  sprite: {
+    offsetX: 6,
+    offsetY: -16,
+  },
+  body: {
     shape: {
       type: 'rectangle',
-      width: 30,
-      height: 30,
+      width: 26,
+      height: 18,
     },
     chamfer: { radius: 4 },
   },
