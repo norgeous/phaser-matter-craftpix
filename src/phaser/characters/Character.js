@@ -11,11 +11,6 @@ const keepUprightStratergies = {
   SPRINGY: 'SPRINGY',
 };
 
-const craftpixOffset = {
-  x: 10,
-  y: -7,
-};
-
 export default class Character extends Phaser.GameObjects.Container {
   static preload(scene, type) {    
     scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
