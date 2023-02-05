@@ -45,15 +45,13 @@ export default class GameScene extends Phaser.Scene {
     this.matter.add.mouseSpring();
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.test1 = new Character(this, 300,300, { type: 'zombie' });
-    this.test2 = new Character(this, 300,300, { type: 'dobermann' });
+    this.test1 = new Character(this, 300,1000, { type: 'zombie' });
+    this.test2 = new Character(this, 320,300, { type: 'dobermann' });
     // this.test2 = new Character(this, 300,300, { type: 'zombie' });
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.smoothMoveCameraTowards(this.test1, 0); // snap to player
-
-    console.log(this)
   }
 
   update () {
