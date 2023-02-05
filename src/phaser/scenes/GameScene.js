@@ -11,6 +11,11 @@ const convertTiledPolygonToGameObject = (scene, {x,y,polygon}) => {
   return scene.matter.add.gameObject(poly, body, false).setPosition(cx + x, cy + y);
 };
 
+const toggleDebug = scene => {
+  scene.matter.world.drawDebug = !scene.matter.world.drawDebug;
+  scene.matter.world.debugGraphic.clear();
+};
+
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('game-scene');
@@ -24,6 +29,10 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create () {
+    // toggle debug GFX
+    toggleDebug(this);
+    this.input.keyboard.on('keydown-CTRL', () => toggleDebug(this));
+
     // load map from json
     const map = this.make.tilemap({ key: 'level1' });
     const tileset = map.addTilesetImage('tileset', 'tileset');
@@ -43,6 +52,8 @@ export default class GameScene extends Phaser.Scene {
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.smoothMoveCameraTowards(this.test1, 0); // snap to player
+
+    console.log(this)
   }
 
   update () {
