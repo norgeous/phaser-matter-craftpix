@@ -1,6 +1,6 @@
 export default {
   animations: {
-    idle:   { end: 3, frameRate: 5,  repeat: -1 },
+    idle:   { end: 3, frameRate: 4,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: -1 },
     attack: { end: 5, frameRate: 10, repeat: -1 },
     death:  { end: 5, frameRate: 10, repeat:  0-1 },
