@@ -4,7 +4,7 @@ export default {
   animations,
   sprite: {
     offsetX: 6,
-    offsetY: -16,
+    offsetY: -15.5,
   },
   body: {
     shape: {

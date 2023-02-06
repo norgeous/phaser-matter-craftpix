@@ -127,7 +127,7 @@ export default class Character extends Phaser.GameObjects.Container {
 
     // Status Effects Machine
     this.StEM = new StEM(this);
-    // this.StEM.add('stun');
+    this.StEM.add('stun');
     // this.StEM.add('fire');
   }
 

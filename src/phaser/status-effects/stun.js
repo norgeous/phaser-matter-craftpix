@@ -5,7 +5,7 @@ import { AbPromise } from '../../utils/AbPromise';
 const stun = (
   entity,
   {
-    duration = 2_000,
+    duration = 20_000,
   } = {},
 ) => {
   const timers = [];
