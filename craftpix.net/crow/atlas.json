@@ -1,40 +1,31 @@
 {
   "frames": [
-    { "filename": "attack_0000", "frame": { "x": 0,   "y": 0, "w": 48, "h": 48 }},
-    { "filename": "attack_0001", "frame": { "x": 48,  "y": 0, "w": 48, "h": 48 }},
-    { "filename": "attack_0002", "frame": { "x": 96,  "y": 0, "w": 48, "h": 48 }},
-    { "filename": "attack_0003", "frame": { "x": 144, "y": 0, "w": 48, "h": 48 }},
-    { "filename": "attack_0004", "frame": { "x": 192, "y": 0, "w": 48, "h": 48 }},
-    { "filename": "attack_0005", "frame": { "x": 240, "y": 0, "w": 48, "h": 48 }},
+    { "filename": "death_0000", "frame": { "x": 0,   "y": 0, "w": 32, "h": 32 }},
+    { "filename": "death_0001", "frame": { "x": 32,  "y": 0, "w": 32, "h": 32 }},
+    { "filename": "death_0002", "frame": { "x": 64,  "y": 0, "w": 32, "h": 32 }},
+    { "filename": "death_0003", "frame": { "x": 96,  "y": 0, "w": 32, "h": 32 }},
 
-    { "filename": "death_0000", "frame": { "x": 0,   "y": 48, "w": 48, "h": 48 }},
-    { "filename": "death_0001", "frame": { "x": 48,  "y": 48, "w": 48, "h": 48 }},
-    { "filename": "death_0002", "frame": { "x": 96,  "y": 48, "w": 48, "h": 48 }},
-    { "filename": "death_0003", "frame": { "x": 144, "y": 48, "w": 48, "h": 48 }},
-    { "filename": "death_0004", "frame": { "x": 192, "y": 48, "w": 48, "h": 48 }},
-    { "filename": "death_0005", "frame": { "x": 240, "y": 48, "w": 48, "h": 48 }},
+    { "filename": "hurt_0000", "frame": { "x": 0,   "y": 32, "w": 32, "h": 32 }},
+    { "filename": "hurt_0001", "frame": { "x": 32,  "y": 32, "w": 32, "h": 32 }},
 
-    { "filename": "hurt_0000", "frame": { "x": 0,   "y": 96, "w": 48, "h": 48 }},
-    { "filename": "hurt_0001", "frame": { "x": 48,  "y": 96, "w": 48, "h": 48 }},
+    { "filename": "idle_0000", "frame": { "x": 0,   "y": 64, "w": 32, "h": 32 }},
+    { "filename": "idle_0001", "frame": { "x": 32,  "y": 64, "w": 32, "h": 32 }},
+    { "filename": "idle_0002", "frame": { "x": 64,  "y": 64, "w": 32, "h": 32 }},
+    { "filename": "idle_0003", "frame": { "x": 96,  "y": 64, "w": 32, "h": 32 }},
 
-    { "filename": "idle_0000", "frame": { "x": 0,   "y": 144, "w": 48, "h": 48 }},
-    { "filename": "idle_0001", "frame": { "x": 48,  "y": 144, "w": 48, "h": 48 }},
-    { "filename": "idle_0002", "frame": { "x": 96,  "y": 144, "w": 48, "h": 48 }},
-    { "filename": "idle_0003", "frame": { "x": 144, "y": 144, "w": 48, "h": 48 }},
-
-    { "filename": "walk_0000", "frame": { "x": 0,   "y": 192, "w": 48, "h": 48 }},
-    { "filename": "walk_0001", "frame": { "x": 48,  "y": 192, "w": 48, "h": 48 }},
-    { "filename": "walk_0002", "frame": { "x": 96,  "y": 192, "w": 48, "h": 48 }},
-    { "filename": "walk_0003", "frame": { "x": 144, "y": 192, "w": 48, "h": 48 }},
-    { "filename": "walk_0004", "frame": { "x": 192, "y": 192, "w": 48, "h": 48 }},
-    { "filename": "walk_0005", "frame": { "x": 240, "y": 192, "w": 48, "h": 48 }}    
+    { "filename": "walk_0000", "frame": { "x": 0,   "y": 96, "w": 32, "h": 32 }},
+    { "filename": "walk_0001", "frame": { "x": 32,  "y": 96, "w": 32, "h": 32 }},
+    { "filename": "walk_0002", "frame": { "x": 64,  "y": 96, "w": 32, "h": 32 }},
+    { "filename": "walk_0003", "frame": { "x": 96,  "y": 96, "w": 32, "h": 32 }},
+    { "filename": "walk_0004", "frame": { "x": 128, "y": 96, "w": 32, "h": 32 }},
+    { "filename": "walk_0005", "frame": { "x": 160, "y": 96, "w": 32, "h": 32 }}    
   ],
   "meta": {
     "app": "manually created by @norgeous",
     "version": "0.0.0",
     "image": "spritesheet.png",
     "format": "RGBA8888",
-    "size": { "w": 288, "h": 240 },
+    "size": { "w": 192, "h": 132 },
     "scale": "1"
   }
 }
