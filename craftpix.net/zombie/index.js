@@ -12,6 +12,6 @@ export default {
       width: 14,
       height: 34,
     },
-    chamfer: { radius: 4 },
+    chamfer: { radius: 3 },
   },
 };
