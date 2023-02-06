@@ -4,13 +4,13 @@ export default {
   animations,
   sprite: {
     offsetX: 6,
-    offsetY: -15.5,
+    offsetY: -16,
   },
   body: {
     shape: {
       type: 'rectangle',
       width: 26,
-      height: 18,
+      height: 17,
     },
     chamfer: { radius: 3 },
   },
