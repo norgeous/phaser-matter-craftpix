@@ -171,7 +171,7 @@ export default class Character extends Phaser.GameObjects.Container {
     this.sprite.setTint(this.StEM.getTint() || 0xffffff);
 
     // SPRINGY
-    const multiplier = 0.005;
+    const multiplier = 0.01;
     if (this.keepUprightStratergy === keepUprightStratergies.SPRINGY && !this.isStunned && this.touching.size) {
       const twoPi = Math.PI * 2;
       const { angle, angularVelocity } = this.gameObject.body;
