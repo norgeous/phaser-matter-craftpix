@@ -1,12 +1,11 @@
-// import zombieAnimations from './zombie/animations.js';
-// import dobermannAnimations from './dobermann/animations.js';
 import zombie from './zombie/index.js';
 import dobermann from './dobermann/index.js';
+import orangetabby from './orangetabby/index.js';
 
 const data = {
-  // zombie: zombieAnimations,
   zombie,
   dobermann,
+  orangetabby,
 };
 
 export default data;
