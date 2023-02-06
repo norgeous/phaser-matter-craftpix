@@ -25,6 +25,7 @@ export default class GameScene extends Phaser.Scene {
     Character.preload(this, 'zombie');
     Character.preload(this, 'dobermann');
     Character.preload(this, 'orangetabby');
+    Character.preload(this, 'crow');
     this.load.image('tileset', 'original-art/tileset.png');
     this.load.tilemapTiledJSON('level1', 'original-art/untitled.json');
   }
@@ -49,6 +50,7 @@ export default class GameScene extends Phaser.Scene {
     this.test1 = new Character(this, 300,1000, { type: 'zombie' });
     this.test2 = new Character(this, 320,300, { type: 'dobermann' });
     this.test3 = new Character(this, 340,300, { type: 'orangetabby' });
+    this.test4 = new Character(this, 360,300, { type: 'crow' });
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -59,6 +61,7 @@ export default class GameScene extends Phaser.Scene {
     this.test1.update();
     this.test2.update();
     this.test3.update();
+    this.test4.update();
     this.smoothMoveCameraTowards(this.test1, 0.95);
   }
 
