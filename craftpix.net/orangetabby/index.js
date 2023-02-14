@@ -10,7 +10,9 @@ export default {
     offsetX: 2,
     offsetY: -16.5,
   },
+  // https://github.com/photonstorm/phaser/blob/master/src/physics/matter-js/lib/body/Body.js
   body: {
+    label: 'orangetabby',
     shape: {
       type: 'rectangle',
       width: 20,

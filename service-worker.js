@@ -1,11 +1,12 @@
 importScripts(
   // 'https://unpkg.com/@babel/standalone@7.19.2/babel.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.19.2/babel.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.20.15/babel.min.js',
   './packageConfig.js',
 );
 
 const CACHE_NAME = `${globalThis.packageConfig.name}@${globalThis.packageConfig.version}`;
-const isDev = location.hostname === 'localhost';
+const isDev = ['localhost', '127.0.0.1'].includes(location.hostname);
+const scope = self.registration.scope.replace(location.origin, '');
 
 const getCache = () => caches.open(CACHE_NAME);
 
@@ -24,7 +25,6 @@ const deleteCaches = async (keep) => {
 };
 
 const getUrl = request => {
-  const scope = self.registration.scope.replace(location.origin, '');
   const url = new URL(request.url);
   url.isSelfHosted = url.host === location.host;
   url.isRoot = scope === url.pathname;

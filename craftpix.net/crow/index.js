@@ -9,12 +9,15 @@ export default {
     offsetX: 2,
     offsetY: -10,
   },
+  // https://github.com/photonstorm/phaser/blob/master/src/physics/matter-js/lib/body/Body.js
   body: {
+    label: 'crow',
     shape: {
       type: 'rectangle',
       width: 12,
       height: 12,
     },
     chamfer: { radius: 3 },
+    // ignoreGravity: true,
   },
 };

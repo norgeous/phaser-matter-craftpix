@@ -10,7 +10,9 @@ export default {
     offsetX: 10,
     offsetY: -7,
   },
+  // https://github.com/photonstorm/phaser/blob/master/src/physics/matter-js/lib/body/Body.js
   body: {
+    label: 'zombie',
     shape: {
       type: 'rectangle',
       width: 14,

@@ -10,12 +10,15 @@ export default {
     offsetX: 6,
     offsetY: -16,
   },
+  // https://github.com/photonstorm/phaser/blob/master/src/physics/matter-js/lib/body/Body.js
   body: {
+    label: 'dobermann',
     shape: {
       type: 'rectangle',
       width: 26,
       height: 17,
     },
     chamfer: { radius: 3 },
+    restitution: 2,
   },
 };

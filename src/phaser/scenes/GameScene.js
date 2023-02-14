@@ -47,10 +47,14 @@ export default class GameScene extends Phaser.Scene {
     this.matter.add.mouseSpring();
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.test1 = new Character(this, 300,1000, { type: 'zombie' });
+    this.test1 = new Character(this, 300,300, { type: 'zombie' });
     this.test2 = new Character(this, 320,300, { type: 'dobermann' });
     this.test3 = new Character(this, 340,300, { type: 'orangetabby' });
     this.test4 = new Character(this, 360,300, { type: 'crow' });
+
+    setTimeout(() => this.test4.StEM.add('fly'), 2_000);
+
+    console.log(this.test4);
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);

@@ -3,17 +3,12 @@ import HealthBar from '../overlays/HealthBar';
 import craftpixData from '../../../craftpix.net/index.js';
 import Sensor from '../Sensor';
 import StEM from './StEM';
-import stun from '../status-effects/stun';
 import { findOtherBody } from '../utils';
 
 const keepUprightStratergies = {
   NONE: 'NONE',
   INSTANT: 'INSTANT',
   SPRINGY: 'SPRINGY',
-};
-
-const springyUpright = entity => {
-
 };
 
 export default class Character extends Phaser.GameObjects.Container {
@@ -94,7 +89,7 @@ export default class Character extends Phaser.GameObjects.Container {
     // sensors
     const { Bodies, Body } = Phaser.Physics.Matter.Matter;
     const { width, height } = this.config.body.shape;
-    this.hitbox = Bodies.rectangle(0, 0, width, height, { ...this.config.body, label: 'Entity' }),
+    this.hitbox = Bodies.rectangle(0, 0, width, height, this.config.body),
     this.touching = new Set();
     this.hitbox.onCollideCallback = data => {
       const other = findOtherBody(this.hitbox.id, data);
@@ -122,12 +117,14 @@ export default class Character extends Phaser.GameObjects.Container {
     this.gameObject.setPosition(x, y);
     
     // save a backup of original inertia
-    this.gameObject.body.inertia_original = this.gameObject.body.inertia;
-    this.gameObject.body.inverseInertia_original = this.gameObject.body.inverseInertia;
+    // this.gameObject.body.inertia_original = this.gameObject.body.inertia;
+    // this.gameObject.body.inverseInertia_original = this.gameObject.body.inverseInertia;
 
     // Status Effects Machine
     this.StEM = new StEM(this);
-    this.StEM.add('stun');
+    // this.StEM.add('stun');
+    // this.StEM.add('zeroG');
+    // this.StEM.add('fly');
     // this.StEM.add('fire');
   }
 
@@ -171,22 +168,22 @@ export default class Character extends Phaser.GameObjects.Container {
     this.sprite.setTint(this.StEM.getTint() || 0xffffff);
 
     // SPRINGY
-    const multiplier = 0.01;
-    if (this.keepUprightStratergy === keepUprightStratergies.SPRINGY && !this.isStunned && this.touching.size) {
-      const twoPi = Math.PI * 2;
-      const { angle, angularVelocity } = this.gameObject.body;
-      this.gameObject.rotation = this.gameObject.rotation % twoPi; // modulo spins
-      const diff = 0 - angle;
-      const newAv = angularVelocity + (diff * multiplier);
-      const isASmallAdjustment = Math.abs(newAv) < 0.01;
-      const isCloseToVertical = Math.abs(this.gameObject.rotation) < 0.01;
-      if (isASmallAdjustment && isCloseToVertical) {
-        this.gameObject.rotation = 0;
-        this.gameObject.setAngularVelocity(0);
-      } else {
-        this.gameObject.setAngularVelocity(newAv);
-      }
-    }
+    // const multiplier = 0.01;
+    // if (this.keepUprightStratergy === keepUprightStratergies.SPRINGY && !this.isStunned && this.touching.size) {
+    //   const twoPi = Math.PI * 2;
+    //   const { angle, angularVelocity } = this.gameObject.body;
+    //   this.gameObject.rotation = this.gameObject.rotation % twoPi; // modulo spins
+    //   const diff = 0 - angle;
+    //   const newAv = angularVelocity + (diff * multiplier);
+    //   const isASmallAdjustment = Math.abs(newAv) < 0.01;
+    //   const isCloseToVertical = Math.abs(this.gameObject.rotation) < 0.01;
+    //   if (isASmallAdjustment && isCloseToVertical) {
+    //     this.gameObject.rotation = 0;
+    //     this.gameObject.setAngularVelocity(0);
+    //   } else {
+    //     this.gameObject.setAngularVelocity(newAv);
+    //   }
+    // }
 
     // kill if zero health
     if (this.health <= 0) {

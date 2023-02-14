@@ -1,15 +1,21 @@
 import { averageHex } from '../utils';
 import stun from '../status-effects/stun';
 import fire from '../status-effects/fire';
+import zeroG from '../status-effects/zeroG';
+import fly from '../status-effects/fly';
 
 const allEffects = {
   stun,
   fire,
+  zeroG,
+  fly,
 };
 
 const effectEmojis = {
   fire: '🔥',
   stun: '💫',
+  zeroG: '🚀',
+  fly: '🦅',
   // hurt 🤕
   // bleed 🩸
   // paralyze ☠️
@@ -24,6 +30,8 @@ const effectTints = {
   fire: 0xff0000,
   poison: 0x00ff00,
   stun: 0xffffff,
+  zeroG: 0xffffff,
+  fly: 0xffffff,
 };
 
 // Status Effect Machine
