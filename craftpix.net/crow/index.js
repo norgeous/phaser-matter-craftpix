@@ -22,7 +22,6 @@ export default {
   defaultEffects: pem => {
     setTimeout(() => {
       pem.add('fly');
-      pem.add('fire');
       pem.add('keepUpright', {
         conditions: [],
       });

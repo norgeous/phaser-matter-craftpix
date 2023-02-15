@@ -54,6 +54,8 @@ export default class GameScene extends Phaser.Scene {
     this.test3 = new Character(this, 340,300, { type: 'orangetabby' });
     this.test4 = new Character(this, 360,300, { type: 'crow' });
 
+    console.log(this.test4)
+
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.smoothMoveCameraTowards(this.test1, 0); // snap to player
