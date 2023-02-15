@@ -4,6 +4,7 @@ import craftpixData from '../../../craftpix.net/index.js';
 import Sensor from '../Sensor';
 import StEM from './StEM';
 import { findOtherBody } from '../utils';
+import PEM from './PromiseEffectMachine';
 
 const keepUprightStratergies = {
   NONE: 'NONE',
@@ -14,7 +15,6 @@ const keepUprightStratergies = {
 export default class Character extends Phaser.GameObjects.Container {
   static preload(scene, type) {    
     scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
-    scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
   }
 
   constructor (
@@ -122,6 +122,8 @@ export default class Character extends Phaser.GameObjects.Container {
 
     // Status Effects Machine
     this.StEM = new StEM(this);
+    this.pem = new PEM(this);
+    this.config.defaultEffects?.(this.pem);
     // this.StEM.add('stun');
     // this.StEM.add('zeroG');
     // this.StEM.add('fly');
@@ -160,30 +162,15 @@ export default class Character extends Phaser.GameObjects.Container {
         this.sensors.top.touching.size ? 'T' : '-',
         this.sensors.bottom.touching.size ? 'B' : '-',
         this.StEM.getEmojis(),
+        this.pem.getEmojis(),
       ].join('')
     );
 
-    // set tint of sprite
-    // console.log(this.sprite.tintFill);
-    this.sprite.setTint(this.StEM.getTint() || 0xffffff);
+    // play animation
+    this.sprite.anims.play(this.pem.getAnimation()[0], true)
 
-    // SPRINGY
-    // const multiplier = 0.01;
-    // if (this.keepUprightStratergy === keepUprightStratergies.SPRINGY && !this.isStunned && this.touching.size) {
-    //   const twoPi = Math.PI * 2;
-    //   const { angle, angularVelocity } = this.gameObject.body;
-    //   this.gameObject.rotation = this.gameObject.rotation % twoPi; // modulo spins
-    //   const diff = 0 - angle;
-    //   const newAv = angularVelocity + (diff * multiplier);
-    //   const isASmallAdjustment = Math.abs(newAv) < 0.01;
-    //   const isCloseToVertical = Math.abs(this.gameObject.rotation) < 0.01;
-    //   if (isASmallAdjustment && isCloseToVertical) {
-    //     this.gameObject.rotation = 0;
-    //     this.gameObject.setAngularVelocity(0);
-    //   } else {
-    //     this.gameObject.setAngularVelocity(newAv);
-    //   }
-    // }
+    // set tint of sprite
+    this.sprite.setTint(this.pem.getTint() || 0xffffff);
 
     // kill if zero health
     if (this.health <= 0) {

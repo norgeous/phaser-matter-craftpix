@@ -18,6 +18,14 @@ export default {
       height: 12,
     },
     chamfer: { radius: 3 },
-    // ignoreGravity: true,
+  },
+  defaultEffects: pem => {
+    setTimeout(() => {
+      pem.add('fly');
+      pem.add('fire');
+      pem.add('keepUpright', {
+        conditions: [],
+      });
+    }, 2_000);
   },
 };

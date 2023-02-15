@@ -12,7 +12,6 @@ const fly = (
   return new AbPromise((resolve) => {
     // complete effect after duration
     timers.push(entity.scene.time.addEvent({ delay: interval, loop: true, callback: () => {
-      console.log('TICk', entity.type)
       entity.gameObject.setVelocityY(-3);
     }}));
   }).finally(() => {

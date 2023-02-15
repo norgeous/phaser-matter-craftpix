@@ -21,4 +21,7 @@ export default {
     chamfer: { radius: 3 },
     restitution: 2,
   },
+  defaultEffects: pem => {
+    pem.add('keepUpright');
+  },
 };

@@ -1,8 +1,9 @@
+import { AbPromise } from '../../utils/AbPromise';
 const twoPi = Math.PI * 2;
 
 export default {
-  emoji: '🧍‍♂️',
-  tint: 0xff0000,
+  emoji: '🆙',
+  tint: undefined,
   preload: scene => {
     
   },
@@ -12,13 +13,14 @@ export default {
       interval = 1,
       conditions = [
         entity => entity.touching.size,
+        entity => !entity.isStunned,
       ],
       multiplier = 0.01,
-    },
+    } = {},
   ) => {
     const timers = [];
 
-    return new AbPromise((resolve) => {
+    return new AbPromise(() => {
       // physics every frame
       timers.push(entity.scene.time.addEvent({
         delay: interval,
@@ -40,11 +42,7 @@ export default {
           }
         },
       }));
-
-      // complete effect after duration
-      timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve }));
     }).finally(() => {
-  
       // kill timers
       timers.forEach(timer => entity.scene.time.removeEvent(timer));
     });

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Character from '../characters/Character';
+import PEM from '../characters/PromiseEffectMachine';
 
 // https://github.com/photonstorm/phaser/issues/6178
 const convertTiledPolygonToGameObject = (scene, {x,y,polygon}) => {
@@ -22,6 +23,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload () {
+    PEM.preload(this);
     Character.preload(this, 'zombie');
     Character.preload(this, 'dobermann');
     Character.preload(this, 'orangetabby');
@@ -51,10 +53,6 @@ export default class GameScene extends Phaser.Scene {
     this.test2 = new Character(this, 320,300, { type: 'dobermann' });
     this.test3 = new Character(this, 340,300, { type: 'orangetabby' });
     this.test4 = new Character(this, 360,300, { type: 'crow' });
-
-    setTimeout(() => this.test4.StEM.add('fly'), 2_000);
-
-    console.log(this.test4);
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
