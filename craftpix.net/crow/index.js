@@ -1,7 +1,7 @@
 export default {
   animations: {
     idle:   { end: 3, frameRate: 1,  repeat: -1 },
-    walk:   { end: 5, frameRate: 10, repeat: -1 },
+    walk:   { end: 5, frameRate: 10, repeat: 0 },
     death:  { end: 3, frameRate: 10, repeat:  0-1 },
     // hurt:   { end: 1, frameRate: 5,  repeat: -1 },
   },
@@ -22,9 +22,7 @@ export default {
   defaultEffects: pem => {
     setTimeout(() => {
       pem.add('fly');
-      pem.add('keepUpright', {
-        conditions: [],
-      });
-    }, 2_000);
+      pem.add('keepUpright');
+    }, 4_000);
   },
 };

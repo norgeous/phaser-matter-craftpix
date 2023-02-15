@@ -22,6 +22,10 @@ class PEM {
     this.statusEffects[name]?.controller?.abort?.();
   }
 
+  has(name) {
+    return Object.keys(this.statusEffects).includes(name);
+  }
+
   getEmojis() {
     return Object.keys(this.statusEffects).map(name => effects[name].emoji).join('');
   }

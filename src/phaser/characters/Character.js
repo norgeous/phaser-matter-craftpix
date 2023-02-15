@@ -161,13 +161,13 @@ export default class Character extends Phaser.GameObjects.Container {
         this.sensors.right.touching.size ? 'R' : '-',
         this.sensors.top.touching.size ? 'T' : '-',
         this.sensors.bottom.touching.size ? 'B' : '-',
-        this.StEM.getEmojis(),
+        // this.StEM.getEmojis(),
         this.pem.getEmojis(),
       ].join('')
     );
 
     // play animation
-    this.sprite.anims.play(this.pem.getAnimation()[0], true)
+    // this.sprite.anims.play(this.pem.getAnimation()[0], true);
 
     // set tint of sprite
     this.sprite.setTint(this.pem.getTint() || 0xffffff);

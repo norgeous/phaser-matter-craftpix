@@ -3,13 +3,14 @@ import { AbPromise } from '../../utils/AbPromise';
 export default {
   emoji: '🔥',
   tint: 0xff0000,
+  // animation: undefined,
   preload: scene => {
     scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
   },
   create: (
     entity,
     {
-      duration = 10_000,
+      duration = 30_000,
       interval = 500,
       damage = 5,
     } = {},
@@ -40,7 +41,7 @@ export default {
   
     const timers = [];
   
-    // damage every interval
+    // damage tick every interval
     timers.push(entity.scene.time.addEvent({
       delay: interval,
       loop: true,
