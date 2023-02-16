@@ -23,11 +23,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload () {
-    PEM.preload(this);
-    Character.preload(this, 'zombie');
-    Character.preload(this, 'dobermann');
-    Character.preload(this, 'orangetabby');
-    Character.preload(this, 'crow');
+    PEM.preload(this); // preload all effects
+    Character.preload(this); // preload all characters
     this.load.image('tileset', 'original-art/tileset.png');
     this.load.tilemapTiledJSON('level1', 'original-art/untitled.json');
   }
@@ -49,24 +46,24 @@ export default class GameScene extends Phaser.Scene {
     this.matter.add.mouseSpring();
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.test1 = new Character(this, 300,300, { type: 'zombie' });
-    this.test2 = new Character(this, 320,300, { type: 'dobermann' });
-    this.test3 = new Character(this, 340,300, { type: 'orangetabby' });
-    this.test4 = new Character(this, 360,300, { type: 'crow' });
-
-    console.log(this.test4)
+    // character group
+    this.characterGroup = this.add.group({
+      maxSize: 10,
+      classType: Character,
+      runChildUpdate: true,
+    });
+    this.characterGroup.create(300,300, { type: 'zombie' });
+    this.characterGroup.create(320,300, { type: 'dobermann' });
+    this.characterGroup.create(340,300, { type: 'orangetabby' });
+    this.characterGroup.create(360,300, { type: 'crow' });
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    this.smoothMoveCameraTowards(this.test1, 0); // snap to player
+    this.smoothMoveCameraTowards(this.characterGroup.getChildren()[0], 0); // snap to player
   }
 
   update () {
-    this.test1.update();
-    this.test2.update();
-    this.test3.update();
-    this.test4.update();
-    this.smoothMoveCameraTowards(this.test1, 0.95);
+    this.smoothMoveCameraTowards(this.characterGroup.getChildren()[0], 0.95);
   }
 
   smoothMoveCameraTowards (target, smoothFactor = 0) {

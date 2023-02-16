@@ -3,13 +3,13 @@ import { averageHex } from '../utils';
 
 // Promise Effect Machine
 class PEM {
+  static preload(scene) {
+    Object.values(effects).forEach(({ preload }) => preload?.(scene));
+  }
+
   constructor(entity) {
     this.entity = entity;
     this.statusEffects = {};
-  }
-
-  static preload(scene) {
-    Object.values(effects).forEach(({ preload }) => preload?.(scene));
   }
 
   add(name, options) {

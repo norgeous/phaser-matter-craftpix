@@ -13,8 +13,10 @@ const keepUprightStratergies = {
 };
 
 export default class Character extends Phaser.GameObjects.Container {
-  static preload(scene, type) {    
-    scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
+  static preload(scene) {
+    Object.keys(craftpixData).forEach(type => {
+      scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
+    });
   }
 
   constructor (
