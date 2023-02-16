@@ -17,6 +17,13 @@ const toggleDebug = scene => {
   scene.matter.world.debugGraphic.clear();
 };
 
+const smoothMoveCameraTowards = (scene, target, smoothFactor = 0) => {
+  if (!target.body) return;
+  const cam = scene.cameras.main;
+  cam.scrollX = smoothFactor * cam.scrollX + (1 - smoothFactor) * (target.x - cam.width * 0.5);
+  cam.scrollY = smoothFactor * cam.scrollY + (1 - smoothFactor) * (target.y - cam.height * 0.6);
+};
+
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('game-scene');
@@ -59,18 +66,10 @@ export default class GameScene extends Phaser.Scene {
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    this.smoothMoveCameraTowards(this.characterGroup.getChildren()[0], 0); // snap to player
+    smoothMoveCameraTowards(this, this.characterGroup.getChildren()[0], 0); // snap to player
   }
 
   update () {
-    this.smoothMoveCameraTowards(this.characterGroup.getChildren()[0], 0.95);
+    smoothMoveCameraTowards(this, this.characterGroup.getChildren()[0], 0.95);
   }
-
-  smoothMoveCameraTowards (target, smoothFactor = 0) {
-    if (!target.body) return;
-    const cam = this.cameras.main;
-    cam.scrollX = smoothFactor * cam.scrollX + (1 - smoothFactor) * (target.x - cam.width * 0.5);
-    cam.scrollY = smoothFactor * cam.scrollY + (1 - smoothFactor) * (target.y - cam.height * 0.6);
-  }
-
 }
