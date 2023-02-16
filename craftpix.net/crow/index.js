@@ -1,4 +1,5 @@
 export default {
+  teamName: 'bird',
   animations: {
     idle:   { end: 3, frameRate: 1,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: 0 },
@@ -24,5 +25,9 @@ export default {
       pem.add('fly');
       pem.add('keepUpright');
     }, 4_000);
+  },
+  sensorSizes: {
+    near: 200,
+    far: 400,
   },
 };

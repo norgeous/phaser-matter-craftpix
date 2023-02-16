@@ -1,4 +1,5 @@
 export default {
+  teamName: 'dog',
   animations: {
     idle:   { end: 3, frameRate: 8,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: -1 },
@@ -23,5 +24,9 @@ export default {
   },
   defaultEffects: pem => {
     pem.add('keepUpright');
+  },
+  sensorSizes: {
+    near: 200,
+    far: 400,
   },
 };

@@ -1,4 +1,5 @@
 export default {
+  teamName: 'undead',
   animations: {
     idle:   { end: 3, frameRate: 5,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: -1 },
@@ -23,5 +24,9 @@ export default {
   defaultEffects: pem => {
     pem.add('keepUpright');
     pem.add('fire');
+  },
+  sensorSizes: {
+    near: 200,
+    far: 400,
   },
 };

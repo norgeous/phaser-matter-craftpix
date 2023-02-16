@@ -25,6 +25,7 @@ export default {
         delay: interval,
         loop: true,
         callback: () => {
+          // console.log(entity.touching);
           if (conditions.some(c => !c(entity))) return;
 
           const { angle, angularVelocity } = entity.gameObject.body;

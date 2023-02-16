@@ -1,4 +1,5 @@
 export default {
+  teamName: 'cat',
   animations: {
     idle:   { end: 3, frameRate: 4,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: -1 },
@@ -22,5 +23,9 @@ export default {
   },
   defaultEffects: pem => {
     pem.add('keepUpright');
+  },
+  sensorSizes: {
+    near: 200,
+    far: 400,
   },
 };

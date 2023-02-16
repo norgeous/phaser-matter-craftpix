@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import HealthBar from '../overlays/HealthBar';
 import craftpixData from '../../../craftpix.net/index.js';
 import Sensor from '../Sensor';
-import StEM from './StEM';
 import { findOtherBody } from '../utils';
 import PEM from './PromiseEffectMachine';
 
@@ -101,11 +100,18 @@ export default class Character extends Phaser.GameObjects.Container {
       const other = findOtherBody(this.hitbox.id, data);
       this.touching.delete(other.id);
     };
+    this.near = new Sensor(this.scene, { standalone: true, shape: { type: 'circle', radius: 50 }, x, y, label: 'near', other: {
+      collisionFilter: {
+        category: 0x0001,
+        mask: 0b1,
+        group: 0,
+      },
+    }});
     this.sensors = {
-      left: new Sensor({ shape: { type: 'circle', radius: 4 }, x: -width/2, y: 0, label: 'left' }),
-      right: new Sensor({ shape: { type: 'circle', radius: 4 }, x: width/2, y: 0, label: 'right' }),
-      top: new Sensor({ shape: { type: 'circle', radius: 4 }, x: 0, y: -height/2, label: 'top' }),
-      bottom: new Sensor({ shape: { type: 'rectangle', width: width-2, height: 3 }, x: 0, y: height/2, label: 'bottom' }),
+      left: new Sensor(this.scene, { standalone: false, shape: { type: 'circle', radius: 4 }, x: -width/2, y: 0, label: 'left' }),
+      right: new Sensor(this.scene, { standalone: false, shape: { type: 'circle', radius: 4 }, x: width/2, y: 0, label: 'right' }),
+      top: new Sensor(this.scene, { standalone: false, shape: { type: 'circle', radius: 4 }, x: 0, y: -height/2, label: 'top' }),
+      bottom: new Sensor(this.scene, { standalone: false, shape: { type: 'rectangle', width: width-2, height: 3 }, x: 0, y: height/2, label: 'bottom' }),
     };
 
     // compound matter body
@@ -117,19 +123,18 @@ export default class Character extends Phaser.GameObjects.Container {
     });
     this.gameObject.setExistingBody(compoundBody);
     this.gameObject.setPosition(x, y);
+
+    this.scene.matter.add.constraint(this.gameObject, this.near.sensor, 0, 1);
     
     // save a backup of original inertia
     // this.gameObject.body.inertia_original = this.gameObject.body.inertia;
     // this.gameObject.body.inverseInertia_original = this.gameObject.body.inverseInertia;
 
     // Status Effects Machine
-    this.StEM = new StEM(this);
     this.pem = new PEM(this);
+
+    // apply default effects
     this.config.defaultEffects?.(this.pem);
-    // this.StEM.add('stun');
-    // this.StEM.add('zeroG');
-    // this.StEM.add('fly');
-    // this.StEM.add('fire');
   }
 
   flipXSprite(shouldFlip) {
@@ -146,6 +151,14 @@ export default class Character extends Phaser.GameObjects.Container {
     if (this.health < 0) this.health = 0;
   }
 
+  preUpdate() {
+    // console.log('pre', this.near.sensor);
+    // // move standalone sensors
+    // this.near.sensor.position = {
+    //   x: this.gameObject.x,
+    //   y: this.gameObject.y,
+    // };
+  }
   update() {
     if (!this.gameObject.body) return;
 
@@ -159,11 +172,11 @@ export default class Character extends Phaser.GameObjects.Container {
     this.text.setText(
       [
         this.touching.size ? 'M' : '-',
+        [...this.near.touching].join(':'),
         this.sensors.left.touching.size ? 'L' : '-',
         this.sensors.right.touching.size ? 'R' : '-',
         this.sensors.top.touching.size ? 'T' : '-',
         this.sensors.bottom.touching.size ? 'B' : '-',
-        // this.StEM.getEmojis(),
         this.pem.getEmojis(),
       ].join('')
     );
