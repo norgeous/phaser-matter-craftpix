@@ -172,7 +172,8 @@ export default class Character extends Phaser.GameObjects.Container {
     this.text.setText(
       [
         this.touching.size ? 'M' : '-',
-        [...this.near.touching].join(':'),
+        // [...this.near.touching].join(':'),
+        this.near.touching.size,
         this.sensors.left.touching.size ? 'L' : '-',
         this.sensors.right.touching.size ? 'R' : '-',
         this.sensors.top.touching.size ? 'T' : '-',
