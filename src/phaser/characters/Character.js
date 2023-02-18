@@ -4,6 +4,7 @@ import craftpixData from '../../../craftpix.net/index.js';
 import Sensor from '../Sensor';
 import { findOtherBody } from '../utils';
 import PEM from './PromiseEffectMachine';
+import { collisionCategories, collisionMaskEverything, getTeamSensorCollisionMask } from '../collisionCategories';
 
 const keepUprightStratergies = {
   NONE: 'NONE',
@@ -100,10 +101,12 @@ export default class Character extends Phaser.GameObjects.Container {
       const other = findOtherBody(this.hitbox.id, data);
       this.touching.delete(other.id);
     };
+
+    const mask = getTeamSensorCollisionMask(this.config.teamName);
     this.near = new Sensor(this.scene, { standalone: true, shape: { type: 'circle', radius: 50 }, x, y, label: 'near', other: {
       collisionFilter: {
-        category: 0x0001,
-        mask: 0b1,
+        category: collisionCategories.default,
+        mask: mask,
         group: 0,
       },
     }});
@@ -120,15 +123,17 @@ export default class Character extends Phaser.GameObjects.Container {
         this.hitbox,
         ...Object.values(this.sensors).map(s => s.sensor),
       ],
+      ...this.config.body,
+      collisionFilter: {
+        category: collisionCategories[this.config.teamName],
+        mask: collisionMaskEverything,
+        group: 0,
+      },
     });
     this.gameObject.setExistingBody(compoundBody);
     this.gameObject.setPosition(x, y);
 
     this.scene.matter.add.constraint(this.gameObject, this.near.sensor, 0, 1);
-    
-    // save a backup of original inertia
-    // this.gameObject.body.inertia_original = this.gameObject.body.inertia;
-    // this.gameObject.body.inverseInertia_original = this.gameObject.body.inverseInertia;
 
     // Status Effects Machine
     this.pem = new PEM(this);
@@ -152,13 +157,8 @@ export default class Character extends Phaser.GameObjects.Container {
   }
 
   preUpdate() {
-    // console.log('pre', this.near.sensor);
-    // // move standalone sensors
-    // this.near.sensor.position = {
-    //   x: this.gameObject.x,
-    //   y: this.gameObject.y,
-    // };
   }
+
   update() {
     if (!this.gameObject.body) return;
 
@@ -172,8 +172,7 @@ export default class Character extends Phaser.GameObjects.Container {
     this.text.setText(
       [
         this.touching.size ? 'M' : '-',
-        // [...this.near.touching].join(':'),
-        this.near.touching.size,
+        this.near.touching.size ? 'N' : '-',
         this.sensors.left.touching.size ? 'L' : '-',
         this.sensors.right.touching.size ? 'R' : '-',
         this.sensors.top.touching.size ? 'T' : '-',
@@ -181,9 +180,6 @@ export default class Character extends Phaser.GameObjects.Container {
         this.pem.getEmojis(),
       ].join('')
     );
-
-    // play animation
-    // this.sprite.anims.play(this.pem.getAnimation()[0], true);
 
     // set tint of sprite
     this.sprite.setTint(this.pem.getTint() || 0xffffff);

@@ -15,5 +15,9 @@ export const collisionCategories = {
   layer32:          0b10000000000000000000000000000000, // 2147483648 (32 max layer)
 };
 
+// export const teamCategories = Object.fromEntries(Object.entries(collisionCategories).filter(([k]) => k.startsWith('team-')));
+export const getTeamSensorCollisionMask = teamName => Object.entries(collisionCategories)
+  .reduce((acc, [k, v]) => k.startsWith('team-') && k !== teamName ? acc | v : acc, 0);
+
 // 4294967295 a mask of everything, the default mask
 export const collisionMaskEverything = 0b11111111111111111111111111111111;

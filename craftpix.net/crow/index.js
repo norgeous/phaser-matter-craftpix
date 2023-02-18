@@ -1,5 +1,5 @@
 export default {
-  teamName: 'bird',
+  teamName: 'team-bird',
   animations: {
     idle:   { end: 3, frameRate: 1,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: 0 },
