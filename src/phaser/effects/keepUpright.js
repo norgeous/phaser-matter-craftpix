@@ -11,7 +11,8 @@ export default {
     {
       interval = 0,
       conditions = [
-        entity => entity.touching.size || entity.pem.has('fly'),
+        // entity => entity.touching.size || entity.pem.has('fly'),
+        entity => Object.values(entity.sensors).some(s => s.touching.size) || entity.pem.has('fly'),
         entity => !entity.pem.has('stun'),
       ],
       multiplier = 0.01,

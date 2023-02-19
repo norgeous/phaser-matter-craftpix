@@ -23,7 +23,7 @@ export default {
   },
   defaultEffects: pem => {
     pem.add('keepUpright');
-    pem.add('fire');
+    // pem.add('fire');
   },
   sensorSizes: {
     near: 200,

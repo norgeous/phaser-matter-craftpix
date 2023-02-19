@@ -115,9 +115,9 @@ export default class Character extends Phaser.GameObjects.Container {
         group: 0,
       },
     }});
-    // const circ = scene.matter.add.circle(0,0,50,{ isSensor: true });
+    // const circ = scene.matter.add.circle(x,y,50,{ isSensor: true });
     // const circ2 = this.scene.matter.add.gameObject(circ);
-    // // console.log(circ, circ2);
+    // console.log(circ, circ2);
     // this.add(circ2);
 
     this.sensors = {

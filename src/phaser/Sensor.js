@@ -47,8 +47,7 @@ class Sensor {
 
     this.sensor.onCollideCallback = data => {
       const other = findOtherBody(this.sensor.id, data);
-      this.touching.add(other.id);
-      // collideCallback('left', other);
+      if (!other.isSensor) this.touching.add(other.id);
     };
     this.sensor.onCollideEndCallback = data => {
       const other = findOtherBody(this.sensor.id, data);
