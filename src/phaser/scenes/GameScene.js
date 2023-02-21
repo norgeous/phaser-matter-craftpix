@@ -38,7 +38,7 @@ export default class GameScene extends Phaser.Scene {
 
   create () {
     // toggle debug GFX
-    // toggleDebug(this);
+    toggleDebug(this);
     this.input.keyboard.on('keydown-CTRL', () => toggleDebug(this));
 
     // load map from json
