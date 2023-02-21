@@ -104,21 +104,14 @@ export default class Character extends Phaser.GameObjects.Container {
 
     const mask = getTeamSensorCollisionMask(this.config.teamName);
     const mask2 = collisionMaskEverything;
-    // console.log(mask.toString(2),mask2.toString(2));
     
     this.near = new Sensor(this.scene, { standalone: true, shape: { type: 'circle', radius: 50 }, x, y, label: 'near', other: {
       collisionFilter: {
         category: collisionCategories.default,
-        // category: collisionCategories[this.config.teamName],
-        // category: 2,
         mask: mask,
         group: 0,
       },
     }});
-    // const circ = scene.matter.add.circle(x,y,50,{ isSensor: true });
-    // const circ2 = this.scene.matter.add.gameObject(circ);
-    // console.log(circ, circ2);
-    // this.add(circ2);
 
     this.sensors = {
       left: new Sensor(this.scene, { standalone: false, shape: { type: 'circle', radius: 4 }, x: -width/2, y: 0, label: 'left' }),
@@ -127,8 +120,6 @@ export default class Character extends Phaser.GameObjects.Container {
       bottom: new Sensor(this.scene, { standalone: false, shape: { type: 'rectangle', width: width-2, height: 3 }, x: 0, y: height/2, label: 'bottom' }),
     };
     
-    // console.log(this);
-
     // compound matter body
     const compoundBody = Body.create({
       ...this.config.body,
@@ -137,9 +128,7 @@ export default class Character extends Phaser.GameObjects.Container {
         ...Object.values(this.sensors).map(s => s.sensor),
       ],
       collisionFilter: {
-        // category: collisionCategories.default,
         category: collisionCategories[this.config.teamName],
-        // category: collisionCategories.default | collisionCategories[this.config.teamName],
         mask: mask2,
         group: 0,
       },
