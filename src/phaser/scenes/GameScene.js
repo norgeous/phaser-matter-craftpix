@@ -60,14 +60,23 @@ export default class GameScene extends Phaser.Scene {
       runChildUpdate: true,
     });
     this.characterGroup.create(360,1100, { type: 'crow' });
-    this.characterGroup.create(360,1100, { type: 'crow' });
-    this.characterGroup.create(300,300, { type: 'zombie' });
-    this.characterGroup.create(320,300, { type: 'dobermann' });
-    this.characterGroup.create(340,300, { type: 'orangetabby' });
+    // this.characterGroup.create(360,1100, { type: 'crow' });
+    // this.characterGroup.create(300,300, { type: 'zombie' });
+    // this.characterGroup.create(320,300, { type: 'dobermann' });
+    // this.characterGroup.create(340,300, { type: 'orangetabby' });
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     smoothMoveCameraTowards(this, this.characterGroup.getChildren()[0], 0); // snap to player
+
+    // copy the velocity every update
+    // it's needed for calculating the collision force (used in fall damage)
+    this.velocityPrev = {};
+    this.matter.world.on('beforeupdate', () => {
+      this.matter.world.localWorld.bodies.forEach(body => {
+        this.velocityPrev[body.id] = { ...body.velocity };
+      });
+    });
   }
 
   update () {

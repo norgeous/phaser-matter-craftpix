@@ -1,7 +1,8 @@
 export default {
   teamName: 'team-dog',
   animations: {
-    idle:   { end: 3, frameRate: 8,  repeat: -1 },
+    idle:   { end: 3,
+        frameRate: 8,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: -1 },
     attack: { end: 5, frameRate: 10, repeat: -1 },
     death:  { end: 5, frameRate: 10, repeat:  0-1 },
@@ -20,11 +21,18 @@ export default {
       height: 17,
     },
     chamfer: { radius: 6 },
-    restitution: 1.2,
+    restitution: 1,
   },
   defaultEffects: pem => {
     pem.add('keepUpright');
   },
+  ai: [
+    'idle',
+    'patrol',
+    'approach',
+    'attack',
+    'evade',
+  ],
   sensorSizes: {
     near: 200,
     far: 400,
