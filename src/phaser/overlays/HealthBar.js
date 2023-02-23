@@ -3,7 +3,7 @@ export default class HealthBar {
     width = 80,
     height = 5,
     padding = 2,
-    background = 0x000000,
+    background = 0x222222,
     maxHealth = 100,
   }) {
     this.scene = scene;
