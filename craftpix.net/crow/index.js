@@ -19,6 +19,9 @@ export default {
       height: 12,
     },
     chamfer: { radius: 3 },
+    friction: 1,
+    frictionStatic: 1,
+    frictionAir: 0.00001,
   },
   defaultEffects: pem => {
     setTimeout(() => {

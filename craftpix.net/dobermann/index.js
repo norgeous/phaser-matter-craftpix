@@ -19,8 +19,8 @@ export default {
       width: 26,
       height: 17,
     },
-    chamfer: { radius: 3 },
-    restitution: 2,
+    chamfer: { radius: 6 },
+    restitution: 1.2,
   },
   defaultEffects: pem => {
     pem.add('keepUpright');

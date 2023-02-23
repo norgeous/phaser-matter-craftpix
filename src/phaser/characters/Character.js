@@ -140,9 +140,7 @@ export default class Character extends Phaser.GameObjects.Container {
 
     // Status Effects Machine
     this.pem = new PEM(this);
-
-    // apply default effects
-    this.config.defaultEffects?.(this.pem);
+    this.config.defaultEffects?.(this.pem); // apply default effects
   }
 
   flipXSprite(shouldFlip) {
