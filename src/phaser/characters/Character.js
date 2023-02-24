@@ -101,7 +101,10 @@ export default class Character extends Phaser.GameObjects.Container {
       const bvp = this.scene.velocityPrev[data.bodyB.parent.id];
       const collisionForce = [avp.x,avp.y,bvp.x,bvp.y]
         .reduce((acc, v) => acc + Math.abs(v), 0);
-      if (collisionForce > 20) this.takeDamage(collisionForce);
+      if (collisionForce > 20) {
+        this.takeDamage(collisionForce);
+        this.pem.add('stun', { duration: collisionForce * 200 });
+      }
     };
     this.hitbox.onCollideEndCallback = data => {
       const other = findOtherBody(this.hitbox.id, data);

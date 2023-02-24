@@ -24,7 +24,6 @@ export default {
   defaultEffects: pem => {
     pem.add('keepUpright');
     // pem.add('fire');
-    pem.add('stun');
   },
   sensorSizes: {
     near: 200,
