@@ -7,44 +7,48 @@ class PEM {
     Object.values(effects).forEach(({ preload }) => preload?.(scene));
   }
 
+  #nextId = 0;
+
   constructor(entity) {
     this.entity = entity;
-    this.statusEffects = {};
+    this.effects = {};
   }
 
   add(name, options) {
     this.remove(name);
-    this.statusEffects[name] = effects[name].create(this.entity, options)
-      .finally(() => delete this.statusEffects[name]);
+    const id = this.#nextId++;
+    const effect = effects[name];
+    this.effects[id] = {
+      name,
+      emoji: effect.emoji,
+      tint: effect.tint,
+      promise: effect.create(this.entity, options).finally(() => delete this.effects[id]),
+    };
   }
-
+  
   remove(name) {
-    this.statusEffects[name]?.controller?.abort?.();
+    Object.values(this.effects)
+      .forEach(effect => {
+        if (effect.name === name) {
+          effect.promise.controller.abort();
+        }
+      });
   }
 
   has(name) {
-    return Object.keys(this.statusEffects).includes(name);
+    return Object.values(this.effects).map(effect => effect.name).includes(name);
   }
 
   getEmojis() {
-    return Object.keys(this.statusEffects).map(name => effects[name].emoji).join('');
+    return Object.values(this.effects).map(effect => effect.emoji).join('');
   }
 
   getTint() {
     return averageHex(
-      Object.keys(this.statusEffects)
-        .map(name => effects[name].tint)
+      Object.values(this.effects)
+        .map(({ tint }) => tint)
         .filter(tint => typeof tint !== 'undefined')
     );
-  }
-
-  getAnimation() {
-    return [
-      ...Object.keys(this.statusEffects)
-        .map(name => effects[name].animation)
-        .filter(animation => typeof animation !== 'undefined'),
-      'idle'
-    ];
   }
 }
 

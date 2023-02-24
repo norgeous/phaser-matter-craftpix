@@ -3,7 +3,6 @@ import { AbPromise } from '../../utils/AbPromise';
 export default {
   emoji: '🔥',
   tint: 0xff0000,
-  // animation: undefined,
   preload: scene => {
     scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
   },

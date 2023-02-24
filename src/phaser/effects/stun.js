@@ -23,7 +23,6 @@ import { AbPromise } from '../../utils/AbPromise';
 export default {
   emoji: '💫',
   tint: 0xffffaa, // yellow
-  // animation: undefined,
   preload: scene => {
     scene.load.image('star', 'https://labs.phaser.io/assets/sprites/star.png');
   },
@@ -31,8 +30,6 @@ export default {
     entity,
     {
       duration = 30_000,
-      interval = 500,
-      damage = 5,
     } = {},
   ) => {
     const particles = entity.scene.add.particles('star');
@@ -62,14 +59,11 @@ export default {
     const timers = [];
   
     return new AbPromise((resolve) => {
-      // complete effect after duration
-      timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve }));
+      timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve })); // complete effect after duration
     }).finally(() => {
-      // explode emitter
-      emitter.explode();
-  
-      // kill timers
-      timers.forEach(timer => entity.scene.time.removeEvent(timer));
+      // console.log('stun complete')
+      emitter.explode(); // explode emitter
+      timers.forEach(timer => entity.scene.time.removeEvent(timer)); // kill timers
     });
   },
 };

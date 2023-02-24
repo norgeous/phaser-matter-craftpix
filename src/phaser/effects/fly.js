@@ -3,7 +3,6 @@ import { AbPromise } from '../../utils/AbPromise';
 export default {
   emoji: '🦅',
   tint: undefined,
-  // animation: 'walk',
   preload: undefined,
   create: (entity) => {
     const timers = [];

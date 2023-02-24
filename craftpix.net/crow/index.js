@@ -28,7 +28,9 @@ export default {
       // pem.add('fly');
       pem.add('keepUpright'); 
       pem.add('gravityModifier'); 
+      // pem.add('stun', {duration: Infinity}); 
     }, 4_000);
+    // pem.add('stun', {duration: Infinity}); 
   },
   sensorSizes: {
     near: 200,

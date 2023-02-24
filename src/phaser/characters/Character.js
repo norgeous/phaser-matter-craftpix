@@ -101,7 +101,7 @@ export default class Character extends Phaser.GameObjects.Container {
       const bvp = this.scene.velocityPrev[data.bodyB.parent.id];
       const collisionForce = [avp.x,avp.y,bvp.x,bvp.y]
         .reduce((acc, v) => acc + Math.abs(v), 0);
-      if (collisionForce > 20) {
+      if (collisionForce > 10) {
         this.takeDamage(collisionForce);
         this.pem.add('stun', { duration: collisionForce * 200 });
       }
@@ -198,7 +198,7 @@ export default class Character extends Phaser.GameObjects.Container {
     if (this.health <= 0) {
       // dead
       // this.gameObject.setCollidesWith(~collisionCategories.enemyDamage);
-      this.rotation = 0; // force Entity upright for death animation
+      // this.rotation = 0; // force Entity upright for death animation
       // this.text.setText('X');
       // this.playAnimation(EntityAnimations.Death).on(Events.ON_ANIMATION_COMPLETE, () => {
       //   if (this.active) this.destroy();
