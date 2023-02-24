@@ -4,15 +4,13 @@ const twoPi = Math.PI * 2;
 export default {
   emoji: '🆙',
   tint: undefined,
-  // animation: undefined,
   preload: undefined,
   create: (
     entity,
     {
       interval = 0,
       conditions = [
-        // entity => entity.touching.size || entity.pem.has('fly'),
-        entity => Object.values(entity.sensors).some(s => s.touching.size) || entity.pem.has('fly'),
+        entity => Object.values(entity.sensors).some(s => s.touching.size) || entity.pem.has('gravityModifier'),
         entity => !entity.pem.has('stun'),
       ],
       multiplier = 0.01,

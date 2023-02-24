@@ -25,8 +25,9 @@ export default {
   },
   defaultEffects: pem => {
     setTimeout(() => {
-      pem.add('fly');
-      pem.add('keepUpright');
+      // pem.add('fly');
+      pem.add('keepUpright'); 
+      pem.add('gravityModifier'); 
     }, 4_000);
   },
   sensorSizes: {
