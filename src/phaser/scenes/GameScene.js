@@ -57,14 +57,10 @@ export default class GameScene extends Phaser.Scene {
       classType: Character,
       runChildUpdate: true,
     });
-    this.characterGroup.create(360,1100, { type: 'crow' });
+    this.characterGroup.create(340,1100, { type: 'orangetabby' });
     this.characterGroup.create(360,1100, { type: 'crow' });
     this.characterGroup.create(320,1100, { type: 'dobermann' });
-    this.characterGroup.create(320,1100, { type: 'dobermann' });
     this.characterGroup.create(300,1100, { type: 'zombie' });
-    this.characterGroup.create(300,1100, { type: 'zombie' });
-    this.characterGroup.create(340,1100, { type: 'orangetabby' });
-    this.characterGroup.create(340,1100, { type: 'orangetabby' });
 
     // camera
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
