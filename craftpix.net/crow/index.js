@@ -25,11 +25,11 @@ export default {
   },
   defaultEffects: pem => {
     pem.add('keepUpright', { multiplier: 0.5 });
-    pem.add('gravityModifier'); 
+    // pem.add('gravityModifier');
   },
   ai: [
     'idle',
-    'patrol',
+    'airpatrol',
     // 'approach',
     // 'attack',
     // 'evade',

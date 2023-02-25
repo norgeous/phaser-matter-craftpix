@@ -2,8 +2,8 @@ import { AbPromise } from '../../../utils/AbPromise';
 const { Body } = Phaser.Physics.Matter.Matter;
 
 export default {
-  actionName: 'patrol',
-  emoji: '🕵️',
+  actionName: 'airpatrol',
+  emoji: '🦅',//'🕵️',
   scorers: [
     // enemyInsideFarProximity: ({ entity }) => entity.sensors.enemyProximity.far.size > 0 && 98,
     () => 99,
@@ -20,13 +20,13 @@ export default {
     const { gravity } = entity.scene.matter.world.engine.world;
     const { body } = entity.gameObject;
     const massMultiplier = gravity.scale * body.mass;
-    // const antiGravity = -gravity.y * massMultiplier;
-    // const wingForce = -.01 * massMultiplier;
+    const antiGravity = -gravity.y * massMultiplier;
+    const wingForce = -.01 * massMultiplier;
     const force = {
-      x: (.3 * entity.facing) * massMultiplier,
-      y: -3 * massMultiplier,
+      x: 0,
+      y: antiGravity + wingForce,
     };
-    const applyMovement = () => entity.sensors.bottom.touching.size && Body.applyForce(body, body.position, force);
+    const applyMovement = () => Body.applyForce(body, body.position, force);
 
     return new AbPromise(resolve => {
       entity.sprite.anims.play('walk', true);

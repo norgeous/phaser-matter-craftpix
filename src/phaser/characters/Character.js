@@ -93,7 +93,7 @@ export default class Character extends Phaser.GameObjects.Container {
     // sensors
     const { Bodies, Body } = Phaser.Physics.Matter.Matter;
     const { width, height } = this.config.body.shape;
-    this.hitbox = Bodies.rectangle(0, 0, width, height, this.config.body),
+    this.hitbox = Bodies.rectangle(0, 0, width, height, {...this.config.body}),
     this.touching = new Set();
     this.hitbox.onCollideCallback = data => {
       const other = findOtherBody(this.hitbox.id, data);
