@@ -4,8 +4,8 @@ import craftpixData from '../../../craftpix.net/index.js';
 import Sensor from '../Sensor';
 import { findOtherBody } from '../utils';
 import PEM from './PromiseEffectMachine';
-import { collisionCategories, collisionMaskEverything, getTeamSensorCollisionMask } from '../collisionCategories';
 import Brain from './Brain';
+import { collisionCategories, collisionMaskEverything, getTeamSensorCollisionMask } from '../collisionCategories';
 
 const keepUprightStratergies = {
   NONE: 'NONE',
@@ -18,6 +18,9 @@ export default class Character extends Phaser.GameObjects.Container {
     Object.keys(craftpixData).forEach(type => {
       scene.load.atlas(type, `craftpix.net/${type}/spritesheet.png`, `craftpix.net/${type}/atlas.json`);
     });
+    
+    PEM.preload(scene); // preload all effects
+    Brain.preload(scene); // preload all effects
   }
 
   constructor (

@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import Character from '../characters/Character';
-import PEM from '../characters/PromiseEffectMachine';
 
 // https://github.com/photonstorm/phaser/issues/6178
 const convertTiledPolygonToGameObject = (scene, {x,y,polygon}) => {
@@ -25,15 +24,14 @@ const smoothMoveCameraTowards = (scene, target, smoothFactor = 0) => {
 };
 
 export default class GameScene extends Phaser.Scene {
-  constructor () {
-    super('game-scene');
-  }
-
   preload () {
-    PEM.preload(this); // preload all effects
     Character.preload(this); // preload all characters
     this.load.image('tileset', 'original-art/tileset.png');
     this.load.tilemapTiledJSON('level1', 'original-art/untitled.json');
+  }
+
+  constructor () {
+    super('game-scene');
   }
 
   create () {
@@ -59,12 +57,13 @@ export default class GameScene extends Phaser.Scene {
       classType: Character,
       runChildUpdate: true,
     });
-    // console.log(this.characterGroup.create(360,1100, { type: 'crow' }));
+    this.characterGroup.create(360,1100, { type: 'crow' });
+    this.characterGroup.create(360,1100, { type: 'crow' });
     this.characterGroup.create(320,1100, { type: 'dobermann' });
     this.characterGroup.create(320,1100, { type: 'dobermann' });
     this.characterGroup.create(300,1100, { type: 'zombie' });
-    this.characterGroup.create(360,1100, { type: 'crow' });
-    this.characterGroup.create(360,1100, { type: 'crow' });
+    this.characterGroup.create(300,1100, { type: 'zombie' });
+    this.characterGroup.create(340,1100, { type: 'orangetabby' });
     this.characterGroup.create(340,1100, { type: 'orangetabby' });
 
     // camera
