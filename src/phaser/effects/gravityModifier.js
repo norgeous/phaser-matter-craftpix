@@ -1,4 +1,6 @@
+import Phaser from 'phaser';
 import { AbPromise } from '../../utils/AbPromise';
+
 const { Body } = Phaser.Physics.Matter.Matter;
 
 export default {
