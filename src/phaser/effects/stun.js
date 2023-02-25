@@ -39,7 +39,7 @@ export default {
     const timers = [];
   
     return new AbPromise((resolve) => {
-      entity.sprite.anims.play('idle', true);
+      if (entity.health > 0) entity.sprite.anims.play('idle', true);
       timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve })); // complete effect after duration
     }).finally(() => {
       // console.log('stun complete')

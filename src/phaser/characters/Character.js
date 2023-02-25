@@ -30,7 +30,7 @@ export default class Character extends Phaser.GameObjects.Container {
       enableKeepUpright = true,
       keepUprightStratergy = keepUprightStratergies.SPRINGY,
       facing = Math.random() > .5 ? 1 : -1,
-      collideCallback = () => {},
+      // collideCallback = () => {},
     },
   ) {
     super(scene, x, y);

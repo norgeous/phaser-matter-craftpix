@@ -82,6 +82,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update () {
-    smoothMoveCameraTowards(this, this.characterGroup.getChildren()[0], 0.95);
+    smoothMoveCameraTowards(this, this.characterGroup.getChildren()[0], 0.9);
   }
 }
