@@ -1,13 +1,13 @@
 import { AbPromise } from '../../../utils/AbPromise';
-const { Body } = Phaser.Physics.Matter.Matter;
+import keepUpright from '../../physics-effects/keepUpright';
+import movement from '../../physics-effects/movement';
 
 export default {
   actionName: 'patrol',
   emoji: '🕵️',
   scorers: [
     // enemyInsideFarProximity: ({ entity }) => entity.sensors.enemyProximity.far.size > 0 && 98,
-    () => 99,
-    () => 1,
+    () => 100,
   ],
   create: (
     entity,
@@ -17,23 +17,20 @@ export default {
   ) => {
     const timers = [];
 
-    const { gravity } = entity.scene.matter.world.engine.world;
-    const { body } = entity.gameObject;
-    const massMultiplier = gravity.scale * body.mass;
-    // const antiGravity = -gravity.y * massMultiplier;
-    // const wingForce = -.01 * massMultiplier;
-    const force = {
-      x: (.3 * entity.facing) * massMultiplier,
-      y: -3 * massMultiplier,
+    const applyKeepUpright = keepUpright(entity);
+    const applyDirection = movement(entity, { x: .3 * entity.facing, y: -3 });
+
+    const apply = () => {
+      applyKeepUpright();
+      if (entity.sensors.bottom.touching.size) applyDirection();
     };
-    const applyMovement = () => entity.sensors.bottom.touching.size && Body.applyForce(body, body.position, force);
 
     return new AbPromise(resolve => {
       entity.sprite.anims.play('walk', true);
-      entity.scene.matter.world.on('beforeupdate', applyMovement);
+      entity.scene.matter.world.on('beforeupdate', apply);
       timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve })); // complete effect after duration
     }).finally(() => {
-      entity.scene.matter.world.off('beforeupdate', applyMovement);
+      entity.scene.matter.world.off('beforeupdate', apply);
       timers.forEach(timer => entity.scene.time.removeEvent(timer)); // kill timers
     });
   },

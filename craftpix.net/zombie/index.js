@@ -22,7 +22,7 @@ export default {
     chamfer: { radius: 3 },
   },
   defaultEffects: pem => {
-    pem.add('keepUpright');
+    // pem.add('keepUpright');
     // pem.add('fire');
   },
   ai: [

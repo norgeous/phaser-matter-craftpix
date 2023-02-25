@@ -1,9 +1,11 @@
 import { AbPromise } from '../../../utils/AbPromise';
-const { Body } = Phaser.Physics.Matter.Matter;
+import keepUpright from '../../physics-effects/keepUpright';
+import antiGravity from '../../physics-effects/antiGravity';
+import movement from '../../physics-effects/movement';
 
 export default {
   actionName: 'airpatrol',
-  emoji: '🦅',//'🕵️',
+  emoji: '🦅',
   preload: scene => {
     scene.load.audio('flap', 'https://labs.phaser.io/assets/audio/SoundEffects/wall.wav');
   },
@@ -21,25 +23,24 @@ export default {
     const timers = [];
 
     const flap = entity.scene.sound.add('flap');
+ 
+    const applyKeepUpright = keepUpright(entity);
+    const applyAntiGravity = antiGravity(entity);
+    const applyWingForce = movement(entity, { y: -.005 });
 
-    const { gravity } = entity.scene.matter.world.engine.world;
-    const { body } = entity.gameObject;
-    const massMultiplier = gravity.scale * body.mass;
-    const antiGravity = -gravity.y * massMultiplier;
-    const wingForce = -.01 * massMultiplier;
-    const force = {
-      x: 0,
-      y: antiGravity + wingForce,
+    const apply = () => {
+      applyKeepUpright();
+      applyAntiGravity();
+      applyWingForce();
     };
-    const applyMovement = () => Body.applyForce(body, body.position, force);
 
     return new AbPromise(resolve => {
       flap.play();
       entity.sprite.anims.play('walk', true);
-      entity.scene.matter.world.on('beforeupdate', applyMovement);
+      entity.scene.matter.world.on('beforeupdate', apply);
       timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve })); // complete effect after duration
     }).finally(() => {
-      entity.scene.matter.world.off('beforeupdate', applyMovement);
+      entity.scene.matter.world.off('beforeupdate', apply);
       timers.forEach(timer => entity.scene.time.removeEvent(timer)); // kill timers
     });
   },

@@ -23,7 +23,7 @@ export default {
     restitution: 1,
   },
   defaultEffects: pem => {
-    pem.add('keepUpright');
+    // pem.add('keepUpright');
   },
   ai: [
     'idle',
