@@ -39,6 +39,7 @@ export default class Character extends Phaser.GameObjects.Container {
     this.type = type;
     this.maxHealth = health;
     this.health = health;
+    this.isDead = false;
     this.enableKeepUpright = enableKeepUpright;
     this.keepUprightStratergy = keepUprightStratergy;
     this.facing = facing;
@@ -200,7 +201,8 @@ export default class Character extends Phaser.GameObjects.Container {
     this.sprite.setTint(this.pem.getTint() || 0xffffff);
 
     // kill if zero health
-    if (this.health <= 0) {
+    if (this.health <= 0 && !this.isDead) {
+      this.isDead = true;
       // dead
       // this.gameObject.setCollidesWith(~collisionCategories.enemyDamage);
       // this.rotation = 0; // force Entity upright for death animation
@@ -208,10 +210,11 @@ export default class Character extends Phaser.GameObjects.Container {
       // this.playAnimation(EntityAnimations.Death).on(Events.ON_ANIMATION_COMPLETE, () => {
       //   if (this.active) this.destroy();
       // });
+      this.sprite.play('death', true);
     }
 
-    if (this.pem.has('stun')) {
-      this.brain.action?.controller?.abort?.('stun');
+    if (this.pem.has('stun') || this.health === 0) {
+      this.brain.action?.controller?.abort?.();
     } else {
       this.brain.update();
     }
