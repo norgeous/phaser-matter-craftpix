@@ -99,7 +99,7 @@ export default class Character extends Phaser.GameObjects.Container {
     this.touching = new Set();
     this.hitbox.onCollideCallback = data => {
       const other = findOtherBody(this.hitbox.id, data);
-      this.touching.add(other.id);
+      if (!other.isSensor) this.touching.add(other.id);
 
       const avp = this.scene.velocityPrev[data.bodyA.parent.id];
       const bvp = this.scene.velocityPrev[data.bodyB.parent.id];
