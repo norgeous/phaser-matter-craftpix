@@ -37,7 +37,7 @@ export default {
         },
       },
     });
-  
+
     const timers = [];
   
     // damage tick every interval

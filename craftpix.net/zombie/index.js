@@ -25,6 +25,13 @@ export default {
     pem.add('keepUpright');
     // pem.add('fire');
   },
+  ai: [
+    'idle',
+    'patrol',
+    // 'approach',
+    // 'attack',
+    // 'evade',
+  ],
   sensorSizes: {
     near: 200,
     far: 400,

@@ -1,8 +1,7 @@
 export default {
   teamName: 'team-dog',
   animations: {
-    idle:   { end: 3,
-        frameRate: 8,  repeat: -1 },
+    idle:   { end: 3, frameRate: 8,  repeat: -1 },
     walk:   { end: 5, frameRate: 10, repeat: -1 },
     attack: { end: 5, frameRate: 10, repeat: -1 },
     death:  { end: 5, frameRate: 10, repeat:  0-1 },
@@ -29,9 +28,9 @@ export default {
   ai: [
     'idle',
     'patrol',
-    'approach',
-    'attack',
-    'evade',
+    // 'approach',
+    // 'attack',
+    // 'evade',
   ],
   sensorSizes: {
     near: 200,

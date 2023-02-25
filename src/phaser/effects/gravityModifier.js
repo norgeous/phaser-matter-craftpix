@@ -12,7 +12,7 @@ export default {
         entity => !entity.pem.has('stun'),
       ],
       gx = 0,
-      gy = .1,
+      gy = .5,
     } = {},
   ) => {
     const { gravity } = entity.scene.matter.world.engine.world;

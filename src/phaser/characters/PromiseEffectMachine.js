@@ -1,4 +1,4 @@
-import * as effects from '../effects/index';
+import effects from '../effects/index';
 import { averageHex } from '../utils';
 
 // Promise Effect Machine

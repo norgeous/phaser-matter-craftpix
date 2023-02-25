@@ -24,6 +24,13 @@ export default {
   defaultEffects: pem => {
     pem.add('keepUpright');
   },
+  ai: [
+    'idle',
+    'patrol',
+    // 'approach',
+    // 'attack',
+    // 'evade',
+  ],
   sensorSizes: {
     near: 200,
     far: 400,

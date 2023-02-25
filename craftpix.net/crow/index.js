@@ -2,7 +2,7 @@ export default {
   teamName: 'team-bird',
   animations: {
     idle:   { end: 3, frameRate: 1,  repeat: -1 },
-    walk:   { end: 5, frameRate: 10, repeat: 0 },
+    walk:   { end: 5, frameRate: 10, repeat: 0-1 },
     death:  { end: 3, frameRate: 10, repeat:  0-1 },
     // hurt:   { end: 1, frameRate: 5,  repeat: -1 },
   },
@@ -32,6 +32,13 @@ export default {
     }, 4_000);
     // pem.add('stun', {duration: Infinity}); 
   },
+  ai: [
+    'idle',
+    'patrol',
+    // 'approach',
+    // 'attack',
+    // 'evade',
+  ],
   sensorSizes: {
     near: 200,
     far: 400,

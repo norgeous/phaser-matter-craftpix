@@ -4,7 +4,7 @@ import fly from './fly';
 import keepUpright from './keepUpright';
 import gravityModifier from './gravityModifier';
 
-export {
+export default {
   fire,
   stun,
   fly,

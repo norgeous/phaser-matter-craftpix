@@ -5,6 +5,7 @@ import Sensor from '../Sensor';
 import { findOtherBody } from '../utils';
 import PEM from './PromiseEffectMachine';
 import { collisionCategories, collisionMaskEverything, getTeamSensorCollisionMask } from '../collisionCategories';
+import Brain from './Brain';
 
 const keepUprightStratergies = {
   NONE: 'NONE',
@@ -150,6 +151,8 @@ export default class Character extends Phaser.GameObjects.Container {
     // Status Effects Machine
     this.pem = new PEM(this);
     this.config.defaultEffects?.(this.pem); // apply default effects
+
+    this.brain = new Brain(this);
   }
 
   flipXSprite(shouldFlip) {
@@ -204,6 +207,8 @@ export default class Character extends Phaser.GameObjects.Container {
       //   if (this.active) this.destroy();
       // });
     }
+
+    this.brain.update();
   }
 
 }

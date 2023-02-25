@@ -59,7 +59,8 @@ export default class GameScene extends Phaser.Scene {
       classType: Character,
       runChildUpdate: true,
     });
-    console.log(this.characterGroup.create(360,1100, { type: 'crow' }));
+    // console.log(this.characterGroup.create(360,1100, { type: 'crow' }));
+    this.characterGroup.create(360,1100, { type: 'crow' });
     // this.characterGroup.create(360,1100, { type: 'crow' });
     // this.characterGroup.create(300,300, { type: 'zombie' });
     // this.characterGroup.create(320,1100, { type: 'dobermann' });
