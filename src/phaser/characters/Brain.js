@@ -17,6 +17,8 @@ class Brain {
     // });
 
     this.action = null;
+    this.actionName = '';
+    this.emoji = '';
   }
 
   evaluate (data) {
@@ -60,9 +62,13 @@ class Brain {
     if (!this.action) {
       const actionName = this.evaluate({ entity: this.entity });
       // console.log(`ai start`, actionName);
+      this.actionName = actionName;
+      this.emoji = actions[actionName].emoji;
       this.action = actions[actionName].create(this.entity).finally(() => {
         // console.log('ai complete', actionName);
+        this.actionName = '';
         this.action = null;
+        this.emoji = '';
       });
     }
   }

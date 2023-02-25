@@ -2,6 +2,7 @@ import { AbPromise } from '../../../utils/AbPromise';
 
 export default {
   actionName: 'patrol',
+  emoji: '🕵️',
   scorers: [
     // enemyInsideFarProximity: ({ entity }) => entity.sensors.enemyProximity.far.size > 0 && 98,
     () => 99,

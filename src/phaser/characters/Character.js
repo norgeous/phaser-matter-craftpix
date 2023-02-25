@@ -56,7 +56,7 @@ export default class Character extends Phaser.GameObjects.Container {
     }
     
     // text
-    this.text = this.scene.add.text(0, 0 - 40, this.type, {
+    this.text = this.scene.add.text(0, 0 - 50, this.type, {
       font: '12px Arial',
       align: 'center',
       color: 'white',
@@ -190,6 +190,8 @@ export default class Character extends Phaser.GameObjects.Container {
         this.sensors.right.touching.size ? 'R' : '-',
         this.sensors.top.touching.size ? 'T' : '-',
         this.sensors.bottom.touching.size ? 'B' : '-',
+        '\n',
+        this.brain.emoji,
         this.pem.getEmojis(),
       ].join('')
     );
@@ -208,7 +210,11 @@ export default class Character extends Phaser.GameObjects.Container {
       // });
     }
 
-    this.brain.update();
+    if (this.pem.has('stun')) {
+      this.brain.action?.controller?.abort?.('stun');
+    } else {
+      this.brain.update();
+    }
   }
 
 }

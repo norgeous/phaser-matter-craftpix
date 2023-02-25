@@ -24,13 +24,8 @@ export default {
     frictionAir: 0.00001,
   },
   defaultEffects: pem => {
-    setTimeout(() => {
-      // pem.add('fly');
-      pem.add('keepUpright'); 
-      pem.add('gravityModifier'); 
-      // pem.add('stun', {duration: Infinity}); 
-    }, 4_000);
-    // pem.add('stun', {duration: Infinity}); 
+    pem.add('keepUpright'); 
+    pem.add('gravityModifier'); 
   },
   ai: [
     'idle',
