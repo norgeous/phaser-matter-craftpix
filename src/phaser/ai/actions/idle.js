@@ -10,7 +10,7 @@ export default {
   create: (
     entity,
     {
-      duration = 5_000,
+      duration = 1_000,
     } = {},
   ) => {
     const timers = [];

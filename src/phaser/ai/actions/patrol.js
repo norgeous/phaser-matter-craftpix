@@ -1,4 +1,5 @@
 import { AbPromise } from '../../../utils/AbPromise';
+const { Body } = Phaser.Physics.Matter.Matter;
 
 export default {
   actionName: 'patrol',
@@ -15,9 +16,12 @@ export default {
     } = {},
   ) => {
     const timers = [];
-    const applyMovement = () => entity.gameObject.setVelocity(-0.1, -.5);
-    
-    
+    const { body } = entity.gameObject;
+    // const applyMovement = () => entity.gameObject.setVelocity(-0.1, -.5);
+    const applyMovement = () => {
+      Body.applyForce(body, body.position, { x: 0, y: -.000067 });
+    };
+
     return new AbPromise(resolve => {
       entity.sprite.anims.play('walk', true);
       entity.scene.matter.world.on('beforeupdate', applyMovement);

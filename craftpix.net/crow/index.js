@@ -24,7 +24,7 @@ export default {
     frictionAir: 0.00001,
   },
   defaultEffects: pem => {
-    pem.add('keepUpright'); 
+    pem.add('keepUpright', { multiplier: 0.5 });
     pem.add('gravityModifier'); 
   },
   ai: [
