@@ -1,11 +1,12 @@
 import Phaser from 'phaser';
 import HealthBar from '../overlays/HealthBar';
 import craftpixData from '../../../craftpix.net/index.js';
-import Sensor from '../Sensor';
-import { findOtherBody } from '../utils';
+// import Sensor from '../Sensor';
+// import { findOtherBody } from '../utils';
 import PEM from './PromiseEffectMachine';
 import Brain from './Brain';
 import { collisionCategories, collisionMaskEverything, getTeamSensorCollisionMask } from '../collisionCategories';
+import WeirdMatterComposite from '../WeirdMatterComposite';
 
 const keepUprightStratergies = {
   NONE: 'NONE',
@@ -92,66 +93,106 @@ export default class Character extends Phaser.GameObjects.Container {
     this.gameObject = this.scene.matter.add.gameObject(this);
     this.scene.add.existing(this);
     
-    // sensors
-    const { Bodies, Body } = Phaser.Physics.Matter.Matter;
+
+
+
+
+
+
+
+
+
+
+
+    // create custom matter compound
     const { width, height } = this.config.body.shape;
-    this.hitbox = Bodies.rectangle(0, 0, width, height, {...this.config.body}),
-    this.touching = new Set();
-    this.hitbox.onCollideCallback = data => {
-      const other = findOtherBody(this.hitbox.id, data);
-      if (other.isSensor) return;
-      
-      this.touching.add(other.id);
-
-      const avp = this.scene.velocityPrev[data.bodyA.parent.id];
-      const bvp = this.scene.velocityPrev[data.bodyB.parent.id];
-      const collisionForce = [avp.x,avp.y,bvp.x,bvp.y]
-        .reduce((acc, v) => acc + Math.abs(v), 0);
-      if (collisionForce > 10) {
-        this.takeDamage(collisionForce);
-        this.pem.add('stun', { duration: collisionForce * 200 });
-      }
-    };
-    this.hitbox.onCollideEndCallback = data => {
-      const other = findOtherBody(this.hitbox.id, data);
-      this.touching.delete(other.id);
-    };
-
-    const mask = getTeamSensorCollisionMask(this.config.teamName);
-    const mask2 = collisionMaskEverything;
-    
-    this.near = new Sensor(this.scene, { standalone: true, shape: { type: 'circle', radius: 50 }, x, y, label: 'near', other: {
-      collisionFilter: {
-        category: collisionCategories.default,
-        mask: mask,
-        group: 0,
+    const teamMask = getTeamSensorCollisionMask(this.config.teamName);
+    this.wmc = new WeirdMatterComposite(
+      this,
+      {
+        x, // absolute world position
+        y, // absolute world position
+        composite: {
+          hitbox: {
+            type: 'rectangle',
+            isSensor: false,
+            x: 0, // composite part's x andy positions are relative to container
+            y: 0,
+            radius: this.config.body.shape.radius,
+            width: this.config.body.shape.width,
+            height: this.config.body.shape.height,
+            chamfer: this.config.body.shape.chamfer,
+            onCollide: data => {
+              // fall damage
+              const avp = this.scene.velocityPrev[data.bodyA.parent.id];
+              const bvp = this.scene.velocityPrev[data.bodyB.parent.id];
+              const collisionForce = [avp.x,avp.y,bvp.x,bvp.y]
+                .reduce((acc, v) => acc + Math.abs(v), 0);
+              if (collisionForce > 10) {
+                this.takeDamage(collisionForce);
+                this.pem.add('stun', { duration: collisionForce * 200 });
+              }
+            },
+          },
+          left: {
+            type: 'circle',
+            isSensor: true,
+            x: -width / 2,
+            y: 0,
+            radius: 4,
+          },
+          right: {
+            type: 'circle',
+            isSensor: true,
+            x: width / 2,
+            y: 0,
+            radius: 4,
+          },
+          top: {
+            type: 'circle',
+            isSensor: true,
+            x: 0,
+            y: -height / 2,
+            radius: 4,
+          },
+          bottom: {
+            type: 'rectangle',
+            isSensor: true,
+            x: 0,
+            y: height / 2,
+            width: width-6,
+            height: 3,
+            chamfer: { radius: 3 },
+          },
+        },
+        physics: {
+          ...this.config.body.physics,
+          collisionFilter: {
+            category: collisionCategories[this.config.teamName],
+            mask: collisionMaskEverything,
+            group: 0,
+          },
+        },
+        standaloneSensors: {
+          near:   {
+            radius: 30,
+            collisionFilter: {
+              category: collisionCategories.default,
+              mask: teamMask,
+              group: 0,
+            },
+          },
+          far:    {
+            radius: 200,
+            collisionFilter: {
+              category: collisionCategories.default,
+              mask: teamMask,
+              group: 0,
+            },
+          },
+        },
       },
-    }});
-
-    this.sensors = {
-      left: new Sensor(this.scene, { standalone: false, shape: { type: 'circle', radius: 4 }, x: -width/2, y: 0, label: 'left' }),
-      right: new Sensor(this.scene, { standalone: false, shape: { type: 'circle', radius: 4 }, x: width/2, y: 0, label: 'right' }),
-      top: new Sensor(this.scene, { standalone: false, shape: { type: 'circle', radius: 4 }, x: 0, y: -height/2, label: 'top' }),
-      bottom: new Sensor(this.scene, { standalone: false, shape: { type: 'rectangle', width: width-2, height: 3 }, x: 0, y: height/2, label: 'bottom' }),
-    };
-    
-    // compound matter body
-    const compoundBody = Body.create({
-      ...this.config.body,
-      parts: [
-        this.hitbox,
-        ...Object.values(this.sensors).map(s => s.sensor),
-      ],
-      collisionFilter: {
-        category: collisionCategories[this.config.teamName],
-        mask: mask2,
-        group: 0,
-      },
-    });
-    this.gameObject.setExistingBody(compoundBody);
-    this.gameObject.setPosition(x, y);
-
-    this.scene.matter.add.constraint(this.gameObject, this.near.sensor, 0, 1);
+    );
 
     // Status Effects Machine
     this.pem = new PEM(this);
@@ -189,12 +230,13 @@ export default class Character extends Phaser.GameObjects.Container {
     // debug text / entity name
     this.text.setText(
       [
-        this.touching.size ? 'M' : '-',
-        this.near.touching.size ? 'N' : '-',
-        this.sensors.left.touching.size ? 'L' : '-',
-        this.sensors.right.touching.size ? 'R' : '-',
-        this.sensors.top.touching.size ? 'T' : '-',
-        this.sensors.bottom.touching.size ? 'B' : '-',
+        this.wmc.sensorData.hitbox.size ? 'H' : '-',
+        this.wmc.sensorData.near.size ? 'N' : '-',
+        this.wmc.sensorData.far.size ? 'F' : '-',
+        this.wmc.sensorData.left.size ? 'L' : '-',
+        this.wmc.sensorData.right.size ? 'R' : '-',
+        this.wmc.sensorData.top.size ? 'T' : '-',
+        this.wmc.sensorData.bottom.size ? 'B' : '-',
         '\n',
         this.brain.emoji,
         this.pem.getEmojis(),

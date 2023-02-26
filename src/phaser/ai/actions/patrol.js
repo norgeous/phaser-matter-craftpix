@@ -21,8 +21,8 @@ export default {
     const applyDirection = movement(entity, { x: .3 * entity.facing, y: -3 });
 
     const apply = () => {
-      applyKeepUpright();
-      if (entity.sensors.bottom.touching.size) applyDirection();
+      if (entity.wmc.sensorData.hitbox.size || entity.wmc.sensorData.bottom.size) applyKeepUpright();
+      if (entity.wmc.sensorData.bottom.size) applyDirection();
     };
 
     return new AbPromise(resolve => {

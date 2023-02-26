@@ -12,16 +12,16 @@ export default {
   },
   // https://github.com/photonstorm/phaser/blob/master/src/physics/matter-js/lib/body/Body.js
   body: {
-    label: 'crow',
     shape: {
-      type: 'rectangle',
       width: 12,
       height: 12,
+      chamfer: { radius: 3 },
     },
-    chamfer: { radius: 3 },
-    friction: 1,
-    frictionStatic: 1,
-    frictionAir: 0.00001,
+    physics: {
+      friction: 1,
+      frictionStatic: 1,
+      frictionAir: 0.00001,
+    },
   },
   defaultEffects: pem => {
     // pem.add('keepUpright', { multiplier: 0.5 });

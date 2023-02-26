@@ -19,7 +19,7 @@ export default {
     const applyKeepUpright = keepUpright(entity);
 
     const apply = () => {
-      if (entity.touching.size) applyKeepUpright();
+      if (entity.wmc.sensorData.hitbox.size) applyKeepUpright();
     };
 
     return new AbPromise((resolve) => {

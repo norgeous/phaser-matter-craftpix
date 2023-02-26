@@ -13,13 +13,13 @@ export default {
   },
   // https://github.com/photonstorm/phaser/blob/master/src/physics/matter-js/lib/body/Body.js
   body: {
-    label: 'orangetabby',
+    // label: 'orangetabby',
     shape: {
-      type: 'rectangle',
+      // type: 'rectangle',
       width: 20,
       height: 16,
+      chamfer: { radius: 3 },
     },
-    chamfer: { radius: 3 },
   },
   defaultEffects: pem => {
     // pem.add('keepUpright');

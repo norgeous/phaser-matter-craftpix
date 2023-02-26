@@ -18,9 +18,11 @@ export default {
       type: 'rectangle',
       width: 26,
       height: 17,
+      chamfer: { radius: 6 },
     },
-    chamfer: { radius: 6 },
-    restitution: 1,
+    physics: {
+      restitution: 1,
+    },
   },
   defaultEffects: pem => {
     // pem.add('keepUpright');

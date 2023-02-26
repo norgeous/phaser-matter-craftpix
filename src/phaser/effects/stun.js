@@ -28,8 +28,8 @@ export default {
         type: 'random',
         source: {
           getRandomPoint: vec => {
-            const x = Phaser.Math.Between(-entity.hitbox.shape.width/2, entity.hitbox.shape.width/2);
-            const y = Phaser.Math.Between(-entity.hitbox.shape.height/2, entity.hitbox.shape.height/2);
+            const x = Phaser.Math.Between(-entity.config.body.shape.width/2, entity.config.body.shape.width/2);
+            const y = Phaser.Math.Between(-entity.config.body.shape.height/2, entity.config.body.shape.height/2);
             return vec.setTo(x, y);
           },
         },
