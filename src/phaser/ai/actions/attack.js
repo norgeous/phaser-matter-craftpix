@@ -11,7 +11,7 @@ export default {
   create: (entity) => {
     return new AbPromise((resolve) => {
       entity.sprite.anims.play('attack').once('animationcomplete', () => {
-        entity.sprite.anims.play('idle', true);
+        // entity.sprite.anims.play('idle', true);
         resolve();
       });
       // move hitbox to correct position
