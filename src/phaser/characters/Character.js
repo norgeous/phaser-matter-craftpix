@@ -192,7 +192,7 @@ export default class Character extends Phaser.GameObjects.Container {
             },
           },
           attack: {
-            radius: 15,
+            radius: 10,
             collisionFilter: {
               category: collisionCategories.default,
               mask: teamMask,

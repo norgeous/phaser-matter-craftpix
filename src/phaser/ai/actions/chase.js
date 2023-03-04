@@ -1,16 +1,7 @@
 import { AbPromise } from '../../../utils/AbPromise';
+import { getCharacterByMatterPartId } from '../../../utils/matter-helpers';
 import keepUpright from '../../physics-effects/keepUpright';
 import movement from '../../physics-effects/movement';
-
-const getCharacterByMatterPartId = (scene, targetId) => scene
-  .matter
-  .getMatterBodies()
-  .find(body => {
-    if (body.parts.some(({ id }) => id === targetId)) return body;
-    return false;
-  })
-  .gameObject;
-
 
 export default {
   actionName: 'chase',

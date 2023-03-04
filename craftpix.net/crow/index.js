@@ -30,8 +30,9 @@ export default {
   ai: [
     'idle',
     'airpatrol',
+    'chase',
+    'attack',
     // 'approach',
-    // 'attack',
     // 'evade',
   ],
   sensorSizes: {
