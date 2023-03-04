@@ -59,6 +59,8 @@ class WeirdMatterComposite {
       standaloneSensors = {},
     } = {},
   ) {
+    this.sensorBody = {};
+    this.sensorConstraint = {};
     this.sensorData = {};
 
     // create compound body
@@ -108,16 +110,23 @@ class WeirdMatterComposite {
         {
           radius,
           collisionFilter,
+          constraintConfig, // https://newdocs.phaser.io/docs/3.54.0/Phaser.Types.Physics.Matter.MatterConstraintConfig
         },
       ],
     ) => {
-      const sensor = entity.scene.matter.add.circle(0,0, radius, {
+      this.sensorBody[sensorName] = entity.scene.matter.add.circle(0,0, radius, {
         label: sensorName,
         collisionFilter,
         ...sensorOpts,
       });
-      this.sensorData[sensorName] = getTouchingSet(sensor);
-      entity.scene.matter.add.constraint(entity.gameObject, sensor, 0, 1);
+      this.sensorData[sensorName] = getTouchingSet(this.sensorBody[sensorName]);
+      this.sensorConstraint[sensorName] = entity.scene.matter.add.constraint(
+        entity.gameObject,
+        this.sensorBody[sensorName],
+        0,
+        1,
+        constraintConfig,
+      );
     });
   }
 }

@@ -35,7 +35,15 @@ export default {
     };
 
     return new AbPromise(resolve => {
-      flap.play();
+      flap.play({
+        mute: false,
+        volume: 0.1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: false,
+        delay: 0
+    });
       entity.sprite.anims.play('walk', true);
       entity.scene.matter.world.on('beforeupdate', apply);
       timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve })); // complete effect after duration

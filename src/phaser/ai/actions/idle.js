@@ -3,9 +3,8 @@ import keepUpright from '../../physics-effects/keepUpright';
 
 export default {
   actionName: 'idle',
-  emoji: '💤',
+  emoji: '🧍',
   scorers: [
-    // NoEnemyInsideFarProximity: ({ entity }) => entity.sensors.enemyProximity.far.size === 0 && 97,
     () => 100,
   ],
   create: (

@@ -2,11 +2,21 @@ import { AbPromise } from '../../../utils/AbPromise';
 import keepUpright from '../../physics-effects/keepUpright';
 import movement from '../../physics-effects/movement';
 
+const getCharacterByMatterPartId = (scene, targetId) => scene
+  .matter
+  .getMatterBodies()
+  .find(body => {
+    if (body.parts.some(({ id }) => id === targetId)) return body;
+    return false;
+  })
+  .gameObject;
+
+
 export default {
-  actionName: 'patrol',
-  emoji: '🕵️',
+  actionName: 'chase',
+  emoji: '😡',
   scorers: [
-    () => 100,
+    ({ entity }) => entity.wmc.sensorData.far.size && 101 || 0,
   ],
   create: (
     entity,
@@ -15,15 +25,18 @@ export default {
     } = {},
   ) => {
     const timers = [];
-
+    const targetId = [...entity.wmc.sensorData.far][0];
+    const target = getCharacterByMatterPartId(entity.scene, targetId);
+    
     let apply;
     return new AbPromise(resolve => {
       apply = () => {
         const applyKeepUpright = keepUpright(entity);
         const applyDirection = movement(entity, { x: .3 * entity.facing, y: -3 });
-        if (entity.wmc.sensorData.far.size) { resolve(); return; }
-        if (entity.wmc.sensorData.left.size) entity.facing = 1; 
-        if (entity.wmc.sensorData.right.size) entity.facing = -1; 
+        if (!entity.wmc.sensorData.far.size) { resolve(); return; }
+        if (entity.wmc.sensorData.attack.size) { resolve(); return; }
+        if (entity.x > target.x) entity.facing = -1;
+        if (entity.x < target.x) entity.facing = 1;
         if (entity.wmc.sensorData.hitbox.size || entity.wmc.sensorData.bottom.size) applyKeepUpright();
         if (entity.wmc.sensorData.bottom.size) applyDirection();
         entity.sprite.anims.play('walk', true);

@@ -1,11 +1,19 @@
+import { AbPromise } from '../../../utils/AbPromise';
+import keepUpright from '../../physics-effects/keepUpright';
+import movement from '../../physics-effects/movement';
+
 export default {
   actionName: 'attack',
-  scorers: {
-    enemyInsideFarProximity: ({ entity }) => entity.sensors.enemyProximity.attack.size > 0 && 99,
-  },
-  action: ({ entity }) => {
-    return new Promise((resolve) => {
-      entity.sprite.anims.play('attack').once('animationcomplete', resolve);
+  emoji: '🗡️',
+  scorers: [
+    ({ entity }) => entity.wmc.sensorData.attack.size && 102 || 0,
+  ],
+  create: (entity) => {
+    return new AbPromise((resolve) => {
+      entity.sprite.anims.play('attack').once('animationcomplete', () => {
+        entity.sprite.anims.play('idle', true);
+        resolve();
+      });
       // move hitbox to correct position
       // enable hitbox
       // find enemy(s) within hitbox

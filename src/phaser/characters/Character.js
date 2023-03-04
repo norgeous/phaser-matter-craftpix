@@ -167,6 +167,7 @@ export default class Character extends Phaser.GameObjects.Container {
         },
         physics: {
           ...this.config.body.physics,
+          label: this.type,
           collisionFilter: {
             category: collisionCategories[this.config.teamName],
             mask: collisionMaskEverything,
@@ -183,12 +184,26 @@ export default class Character extends Phaser.GameObjects.Container {
             },
           },
           far:    {
-            radius: 200,
+            radius: 100,
             collisionFilter: {
               category: collisionCategories.default,
               mask: teamMask,
               group: 0,
             },
+          },
+          attack: {
+            radius: 15,
+            collisionFilter: {
+              category: collisionCategories.default,
+              mask: teamMask,
+              group: 0,
+            },
+            constraintConfig: {
+              pointA: {
+                x: 40,
+                y: 0,
+              },
+            }
           },
         },
       },
@@ -226,10 +241,15 @@ export default class Character extends Phaser.GameObjects.Container {
 
     // flip sprite to match facing
     this.flipXSprite(this.facing === -1);
+    this.wmc.sensorConstraint.attack.pointA = {
+      x: this.config.body.shape.width / 2 * this.facing,
+      y: 0,
+    };
 
     // debug text / entity name
     this.text.setText(
       [
+        this.wmc.sensorData.attack.size ? 'A' : '-',
         this.wmc.sensorData.hitbox.size ? 'H' : '-',
         this.wmc.sensorData.near.size ? 'N' : '-',
         this.wmc.sensorData.far.size ? 'F' : '-',
