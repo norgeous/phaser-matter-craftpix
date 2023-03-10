@@ -18,11 +18,14 @@ class PEM {
     this.remove(name);
     const id = this.#nextId++;
     const effect = effects[name];
+    const { promise, data } = effect.create(this.entity, options);
+    promise.finally(() => delete this.effects[id]);
     this.effects[id] = {
       name,
       emoji: effect.emoji,
       tint: effect.tint,
-      promise: effect.create(this.entity, options).finally(() => delete this.effects[id]),
+      promise,
+      data,
     };
   }
   
@@ -49,6 +52,18 @@ class PEM {
         .map(({ tint }) => tint)
         .filter(tint => typeof tint !== 'undefined')
     );
+  }
+
+  tint(sprite) {
+    const tintFillValues = Object.values(this.effects).reduce((acc, { data }) => {
+      return[
+        ...acc,
+        ...(typeof data?.tintFill !== 'undefined' && [data?.tintFill] || []),
+      ];
+    }, []);
+
+    if (tintFillValues.length) sprite.setTintFill(averageHex(tintFillValues));
+    else sprite.setTint(this.getTint() || 0xffffff);
   }
 }
 

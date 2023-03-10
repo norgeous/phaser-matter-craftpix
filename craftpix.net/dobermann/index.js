@@ -21,7 +21,7 @@ export default {
       chamfer: { radius: 6 },
     },
     physics: {
-      restitution: 1,
+      restitution: 0.9,
     },
   },
   defaultEffects: pem => {

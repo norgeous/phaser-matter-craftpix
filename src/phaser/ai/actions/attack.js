@@ -17,7 +17,6 @@ export default {
     
     let apply;
     return new AbPromise((resolve) => {
-      
       attack.play({
         mute: false,
         volume: .5,
@@ -28,11 +27,12 @@ export default {
         delay: 0,
       });
       entity.sprite.anims.play('attack').once('animationcomplete', () => {
-        const targetId = [...entity.wmc.sensorData.far][0];
+        const targetId = [...entity.wmc.sensorData.attack][0];
         const target = getCharacterByMatterPartId(entity.scene, targetId);
         if (target) {
           movement(target, { x: 5 * entity.facing, y:-10 })();
-          target.pem.add('stun',{duration: 1000});
+          target.pem.add('hurt', { duration: 1000 });
+          target.takeDamage(10);
         }
         resolve();
       });

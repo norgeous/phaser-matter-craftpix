@@ -264,7 +264,7 @@ export default class Character extends Phaser.GameObjects.Container {
     );
 
     // set tint of sprite
-    this.sprite.setTint(this.pem.getTint() || 0xffffff);
+    this.pem.tint(this.sprite);
 
     // kill if zero health
     if (this.health <= 0 && !this.isDead) {

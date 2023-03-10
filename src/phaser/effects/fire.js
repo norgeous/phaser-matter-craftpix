@@ -47,7 +47,7 @@ export default {
       callback: () => entity.takeDamage(damage),
     }));
   
-    return new AbPromise((resolve) => {
+    const promise = new AbPromise((resolve) => {
       // complete effect after duration
       timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve }));
     }).finally(() => {
@@ -57,5 +57,7 @@ export default {
       // kill timers
       timers.forEach(timer => entity.scene.time.removeEvent(timer));
     });
+
+    return { promise };
   },
 };
