@@ -2,7 +2,6 @@ import { AbPromise } from '../../utils/AbPromise';
 
 export default {
   emoji: '💫',
-  tint: 0xffffaa, // yellow
   preload: scene => {
     scene.load.image('star', 'https://labs.phaser.io/assets/sprites/star.png');
   },
@@ -37,6 +36,10 @@ export default {
     });
   
     const timers = [];
+
+    const data = {
+      tint: 0xffffaa, // yellow
+    };
   
     const promise = new AbPromise((resolve) => {
       if (entity.health > 0) entity.sprite.anims.play('idle', true);
@@ -47,6 +50,6 @@ export default {
       timers.forEach(timer => entity.scene.time.removeEvent(timer)); // kill timers
     });
 
-    return { promise };
+    return { promise, data };
   },
 };

@@ -3,7 +3,7 @@ import { AbPromise } from '../../utils/AbPromise';
 export default {
   emoji: '🤕',
   preload: scene => {
-    scene.load.image('blood', 'https://labs.phaser.io/assets/particles/redbubble.png');
+    scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
   },
   create: (
     entity,
@@ -12,7 +12,7 @@ export default {
       interval = 50,
     } = {},
   ) => {
-    const particles = entity.scene.add.particles('blood');
+    const particles = entity.scene.add.particles('red');
     const emitter = particles.createEmitter({
       follow: entity,
       speed: 10,

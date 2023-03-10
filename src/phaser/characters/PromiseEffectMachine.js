@@ -46,14 +46,6 @@ class PEM {
     return Object.values(this.effects).map(effect => effect.emoji).join('');
   }
 
-  getTint() {
-    return averageHex(
-      Object.values(this.effects)
-        .map(({ tint }) => tint)
-        .filter(tint => typeof tint !== 'undefined')
-    );
-  }
-
   tint(sprite) {
     const tintFillValues = Object.values(this.effects).reduce((acc, { data }) => {
       return[
@@ -62,8 +54,15 @@ class PEM {
       ];
     }, []);
 
+    const tintValues = Object.values(this.effects).reduce((acc, { data }) => {
+      return[
+        ...acc,
+        ...(typeof data?.tint !== 'undefined' && [data?.tint] || []),
+      ];
+    }, []);
+
     if (tintFillValues.length) sprite.setTintFill(averageHex(tintFillValues));
-    else sprite.setTint(this.getTint() || 0xffffff);
+    else sprite.setTint(averageHex(tintValues) || 0xffffff);
   }
 }
 

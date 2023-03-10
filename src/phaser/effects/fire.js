@@ -2,9 +2,8 @@ import { AbPromise } from '../../utils/AbPromise';
 
 export default {
   emoji: '🔥',
-  tint: 0xff0000,
   preload: scene => {
-    scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
+    scene.load.image('fire', 'https://labs.phaser.io/assets/particles/flame2.png');
   },
   create: (
     entity,
@@ -14,14 +13,14 @@ export default {
       damage = 5,
     } = {},
   ) => {
-    const particles = entity.scene.add.particles('red');
+    const particles = entity.scene.add.particles('fire');
     const emitter = particles.createEmitter({
       follow: entity,
       speed: 10,
       scale: { start: .1, end: 0 },
-      lifespan: 1000,
+      lifespan: 2000,
       gravityY: -10,
-      scale: { start: 0, end: 0.1, ease: 'Quad.easeOut' },
+      scale: { start: 0, end: .2, ease: 'Quad.easeOut' },
       alpha: { start: 1, end: 0, ease: 'Quad.easeIn' },
       blendMode: 'ADD',
       frequency: 100,
@@ -30,8 +29,8 @@ export default {
         type: 'random',
         source: {
           getRandomPoint: vec => {
-            const x = Phaser.Math.Between(-entity.hitbox.shape.width/2, entity.hitbox.shape.width/2);
-            const y = Phaser.Math.Between(-entity.hitbox.shape.height/2, entity.hitbox.shape.height/2);
+            const x = Phaser.Math.Between(-entity.config.body.shape.width/2, entity.config.body.shape.width/2);
+            const y = Phaser.Math.Between(-entity.config.body.shape.height/2, entity.config.body.shape.height/2);
             return vec.setTo(x, y);
           },
         },
@@ -39,6 +38,10 @@ export default {
     });
 
     const timers = [];
+
+    const data = {
+      tint: 0xff4444, // red
+    };
   
     // damage tick every interval
     timers.push(entity.scene.time.addEvent({
@@ -58,6 +61,6 @@ export default {
       timers.forEach(timer => entity.scene.time.removeEvent(timer));
     });
 
-    return { promise };
+    return { promise, data };
   },
 };

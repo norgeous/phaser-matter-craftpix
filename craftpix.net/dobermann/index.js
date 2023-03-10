@@ -26,6 +26,7 @@ export default {
   },
   defaultEffects: pem => {
     // pem.add('keepUpright');
+    pem.add('fire');
   },
   ai: [
     'idle',
