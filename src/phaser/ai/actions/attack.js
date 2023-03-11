@@ -7,19 +7,22 @@ export default {
   actionName: 'attack',
   emoji: '🗡️',
   preload: scene => {
-    scene.load.audio('attack', 'http://labs.phaser.io/assets/audio/monsters/growl3.mp3');
+    scene.load.audio('attack-team-bird', 'https://labs.phaser.io/assets/audio/monsters/crow.mp3');
+    scene.load.audio('attack-team-dog', 'https://labs.phaser.io/assets/audio/monsters/growl3.mp3');
+    scene.load.audio('attack-team-cat', 'https://labs.phaser.io/assets/games/bank-panic/scream1.mp3');
+    scene.load.audio('attack-team-undead', 'https://labs.phaser.io/assets/audio/monsters/growl10.mp3');
   },
   scorers: [
     ({ entity }) => entity.wmc.sensorData.attack.size && 102 || 0,
   ],
   create: (entity) => {
-    const attack = entity.scene.sound.add('attack');
+    const attack = entity.scene.sound.add(`attack-${entity.config.teamName}`);
     
     let apply;
     return new AbPromise((resolve) => {
       attack.play({
         mute: false,
-        volume: .01,
+        volume: .1,
         rate: 0.75 + (Math.random()/2),
         detune: 0,
         seek: 0,

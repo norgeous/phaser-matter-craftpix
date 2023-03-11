@@ -7,7 +7,7 @@ export default {
   actionName: 'airpatrol',
   emoji: '🦅',
   preload: scene => {
-    scene.load.audio('flap', 'https://labs.phaser.io/assets/audio/monsters/crow.mp3');
+    scene.load.audio('flap', 'https://labs.phaser.io/assets/games/card-memory-game/audio/whoosh.mp3');
   },
   scorers: [
     // enemyInsideFarProximity: ({ entity }) => entity.sensors.enemyProximity.far.size > 0 && 98,
