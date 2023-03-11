@@ -46,7 +46,6 @@ export default {
     };
   
     const promise = new AbPromise((resolve) => {
-      
       hurt.play({
         mute: false,
         volume: 0.1,
