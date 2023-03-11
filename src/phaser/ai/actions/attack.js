@@ -22,7 +22,7 @@ export default {
     return new AbPromise((resolve) => {
       attack.play({
         mute: false,
-        volume: .1,
+        volume: .05,
         rate: 0.75 + (Math.random()/2),
         detune: 0,
         seek: 0,

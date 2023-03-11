@@ -23,6 +23,15 @@ export default {
     const timers = [];
 
     const flap = entity.scene.sound.add('flap');
+    const playFlap = () => flap.play({
+      mute: false,
+      volume: 0.05,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: false,
+      delay: 0
+    });
  
     const applyKeepUpright = keepUpright(entity);
     const applyAntiGravity = antiGravity(entity);
@@ -34,20 +43,16 @@ export default {
       applyWingForce();
     };
 
+    const onUpdate = (a,b,c,d) => {
+      if (b.index === 3) playFlap();
+    };
+
     return new AbPromise(resolve => {
-      flap.play({
-        mute: false,
-        volume: 0.1,
-        rate: 1,
-        detune: 0,
-        seek: 0,
-        loop: false,
-        delay: 0
-      });
-      entity.sprite.anims.play('walk', true);
+      entity.sprite.anims.play('walk', true).on('animationupdate', onUpdate);
       entity.scene.matter.world.on('beforeupdate', apply);
       timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve })); // complete effect after duration
     }).finally(() => {
+      entity.sprite.anims.play('walk', true).off('animationupdate', onUpdate);
       entity.scene.matter.world.off('beforeupdate', apply);
       timers.forEach(timer => entity.scene.time.removeEvent(timer)); // kill timers
     });
