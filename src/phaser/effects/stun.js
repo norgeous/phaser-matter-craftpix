@@ -4,6 +4,8 @@ export default {
   emoji: '💫',
   preload: scene => {
     scene.load.image('star', 'https://labs.phaser.io/assets/sprites/star.png');
+    scene.load.audio('hit', 'https://labs.phaser.io/assets/audio/kyobi/wavs/hitWall.wav');
+    
   },
   create: (
     entity,
@@ -34,6 +36,8 @@ export default {
         },
       },
     });
+
+    const hit = entity.scene.sound.add('hit');
   
     const timers = [];
 
@@ -42,6 +46,15 @@ export default {
     };
   
     const promise = new AbPromise((resolve) => {
+      hit.play({
+        mute: false,
+        volume: 0.1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: false,
+        delay: 0
+      });
       if (entity.health > 0) entity.sprite.anims.play('idle', true);
       timers.push(entity.scene.time.addEvent({ delay: duration, callback: resolve })); // complete effect after duration
     }).finally(() => {

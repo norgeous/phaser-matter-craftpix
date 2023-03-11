@@ -7,7 +7,7 @@ export default {
   actionName: 'attack',
   emoji: '🗡️',
   preload: scene => {
-    scene.load.audio('attack', 'https://labs.phaser.io/assets/audio/SoundEffects/menu_switch.mp3');
+    scene.load.audio('attack', 'http://labs.phaser.io/assets/audio/monsters/growl3.mp3');
   },
   scorers: [
     ({ entity }) => entity.wmc.sensorData.attack.size && 102 || 0,
@@ -19,7 +19,7 @@ export default {
     return new AbPromise((resolve) => {
       attack.play({
         mute: false,
-        volume: .5,
+        volume: .01,
         rate: 0.75 + (Math.random()/2),
         detune: 0,
         seek: 0,

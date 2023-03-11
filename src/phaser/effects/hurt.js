@@ -3,6 +3,7 @@ import { AbPromise } from '../../utils/AbPromise';
 export default {
   emoji: '🤕',
   preload: scene => {
+    scene.load.audio('hurt', 'https://labs.phaser.io/assets/audio/SoundEffects/menu_switch.mp3');
     scene.load.image('red', 'https://labs.phaser.io/assets/particles/red.png');
   },
   create: (
@@ -35,6 +36,8 @@ export default {
         },
       },
     });
+    
+    const hurt = entity.scene.sound.add('hurt');
   
     const timers = [];
 
@@ -43,6 +46,16 @@ export default {
     };
   
     const promise = new AbPromise((resolve) => {
+      
+      hurt.play({
+        mute: false,
+        volume: 0.1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: false,
+        delay: 0
+      });
       let i = 0;
       timers.push(entity.scene.time.addEvent({
         delay: interval,
