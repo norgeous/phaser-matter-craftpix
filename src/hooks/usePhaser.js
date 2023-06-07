@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Phaser from 'phaser';
+import * as Phaser from 'phaser';
 import config from '../phaser/config';
 import GameScene from '../phaser/scenes/GameScene';
 

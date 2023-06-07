@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import * as Phaser from 'phaser';
 
 export const findOtherBody = (thisSensorId, collisionData) => {
   const bodies = [collisionData.bodyA, collisionData.bodyB];

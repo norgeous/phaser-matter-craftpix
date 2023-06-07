@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import * as Phaser from 'phaser';
 
 const { Body } = Phaser.Physics.Matter.Matter;
 const twoPi = Math.PI * 2;

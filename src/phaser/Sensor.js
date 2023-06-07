@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import * as Phaser from 'phaser';
 import { findOtherBody } from './utils';
 const { Bodies } = Phaser.Physics.Matter.Matter;
 

@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import * as Phaser from 'phaser';
 import HealthBar from '../overlays/HealthBar';
 import craftpixData from '../../../craftpix.net/index.js';
 // import Sensor from '../Sensor';

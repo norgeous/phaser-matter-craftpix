@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import * as Phaser from 'phaser';
 import Character from '../characters/Character';
 
 // https://github.com/photonstorm/phaser/issues/6178
