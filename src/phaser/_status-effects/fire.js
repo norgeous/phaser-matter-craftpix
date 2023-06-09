@@ -10,8 +10,7 @@ const fire = (
     damage = 5,
   } = {},
 ) => {
-  const particles = entity.scene.add.particles('red');
-  const emitter = particles.createEmitter({
+  const emitter = entity.scene.add.particles(0, 0, 'red', {
     follow: entity,
     speed: 10,
     scale: { start: .1, end: 0 },
